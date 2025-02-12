@@ -9,4 +9,11 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
+
+    public function json(string $message, array $data=[], int $statusCode=200) {
+        return response()->json([
+            "message" => $message,
+            "data" => $data,
+        ], $statusCode);
+    }
 }

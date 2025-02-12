@@ -1,7 +1,14 @@
 <?php
 
-use App\Http\Controllers\LandingController;
+use App\Http\Controllers\{
+    LandingController,
+    CategoryController
+};
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\Admin\{
+    DashboardController,
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -15,3 +22,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [LandingController::class, 'home']);
+
+Route::name('admin.')->prefix('/admin')->group(function() {
+
+    Route::name('dashboard.')->prefix('/dashboard')->group(function() {
+        Route::get("/", [DashboardController::class, 'view'])->name("view");
+    });
+
+    Route::name('category.')->prefix('/category')->group(function() {
+        Route::get("/", [CategoryController::class, 'view'])->name("view");
+
+    });
+
+});
