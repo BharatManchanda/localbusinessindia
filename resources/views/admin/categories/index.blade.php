@@ -10,7 +10,7 @@
                         <h3 class="mb-0">Categories</h3>
                     </div>
                     <div class="col-sm-6 justify-content-end d-flex">
-                        <button class="btn btn-primary">
+                        <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#create-category">
                             <i class="bi bi-plus"></i>
                             Create
                         </button>
@@ -27,6 +27,8 @@
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Title</th>
+                                    <th scope="col">Slug</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -34,6 +36,13 @@
                                 <tr>
                                     <th scope="row">1</th>
                                     <td>Mark</td>
+                                    <td>Mark</td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                            <!-- <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label> -->
+                                        </div>
+                                    </td>
                                     <td>
                                         <div class="d-flex align-items-center gap-2 cursor-pointer">
                                             <i class="bi bi-eye"></i>
@@ -45,6 +54,13 @@
                                 <tr>
                                     <th scope="row">2</th>
                                     <td>Jacob</td>
+                                    <td>Jacob</td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                            <!-- <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label> -->
+                                        </div>
+                                    </td>
                                     <td>
                                         <div class="d-flex align-items-center gap-2 cursor-pointer">
                                             <i class="bi bi-eye"></i>
@@ -56,6 +72,13 @@
                                 <tr>
                                     <th scope="row">3</th>
                                     <td>Larry</td>
+                                    <td>Larry</td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                            <!-- <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label> -->
+                                        </div>
+                                    </td>
                                     <td>
                                         <div class="d-flex align-items-center gap-2 cursor-pointer">
                                             <i class="bi bi-eye"></i>
@@ -86,4 +109,5 @@
             </div>
         </div>
     </main>
+    @include("admin.categories.createOrEdit.index")
 @endsection

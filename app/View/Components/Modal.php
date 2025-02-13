@@ -11,9 +11,17 @@ class Modal extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
-    {
-        //
+
+     public $id;
+    public $title;
+    public $size;
+    public $footer;
+
+    public function __construct($id = 'defaultModal', $title = 'Default Modal Title', $size = 'modal-md', $footer = null) {
+        $this->id = $id;
+        $this->title = $title;
+        $this->size = $size;
+        $this->footer = $footer ?? '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>';
     }
 
     /**
