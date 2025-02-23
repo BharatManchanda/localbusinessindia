@@ -10,7 +10,7 @@
                         <h3 class="mb-0">Categories</h3>
                     </div>
                     <div class="col-sm-6 justify-content-end d-flex">
-                        <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#create-category">
+                        <button class="btn btn-primary" onclick="createOrEdit.assignInitValue()" data-bs-toggle="modal" data-bs-target="#create-category">
                             <i class="bi bi-plus"></i>
                             Create
                         </button>
@@ -25,82 +25,23 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Slug</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col" style="width:10%">#</th>
+                                    <th scope="col" style="width:10%">ID</th>
+                                    <th scope="col" style="width:20%">Title</th>
+                                    <th scope="col" style="width:20%">Slug</th>
+                                    <th scope="col" style="width:10%" class="text-center">Home Screen</th>
+                                    <th scope="col" style="width:10%">Status</th>
+                                    <th scope="col" style="width:20%">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Mark</td>
-                                    <td>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                                            <!-- <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label> -->
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-2 cursor-pointer">
-                                            <i class="bi bi-eye"></i>
-                                            <i class="bi bi-pencil"></i>
-                                            <i class="bi bi-trash3"></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Jacob</td>
-                                    <td>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                                            <!-- <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label> -->
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-2 cursor-pointer">
-                                            <i class="bi bi-eye"></i>
-                                            <i class="bi bi-pencil"></i>
-                                            <i class="bi bi-trash3"></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>Larry</td>
-                                    <td>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                                            <!-- <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label> -->
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-2 cursor-pointer">
-                                            <i class="bi bi-eye"></i>
-                                            <i class="bi bi-pencil"></i>
-                                            <i class="bi bi-trash3"></i>
-                                        </div>
-                                    </td>
-                                </tr>
+                            <tbody id="categories-list">
+                                <!-- Dynamic Render -->
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-end">
                             <nav aria-label="page-navigation">
-                                <ul class="pagination justify-content-center">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Next</a>
-                                    </li>
+                                <ul class="pagination justify-content-center" id="categories-pagination">
+                                    <!-- Dynamic Render -->
                                 </ul>
                             </nav>
                         </div>
@@ -110,4 +51,8 @@
         </div>
     </main>
     @include("admin.categories.createOrEdit.index")
+    @include("admin.categories.delete.index")
+    <script>
+        list.fetch();
+    </script>
 @endsection

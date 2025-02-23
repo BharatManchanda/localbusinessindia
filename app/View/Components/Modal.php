@@ -12,7 +12,7 @@ class Modal extends Component
      * Create a new component instance.
      */
 
-     public $id;
+    public $id;
     public $title;
     public $size;
     public $footer;

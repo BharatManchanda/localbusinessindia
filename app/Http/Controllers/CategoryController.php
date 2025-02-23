@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Category\CreateOrEditRequest;
 use Illuminate\Http\Request;
 use App\Repositories\CategoryRepository;
 class CategoryController extends Controller
@@ -9,20 +10,51 @@ class CategoryController extends Controller
     //
     public function view(Request $request) {
         try {
-            $categories = CategoryRepository::list($request);
-            return view("admin.categories.index", [
-                "categories" => $categories
+            return view("admin.categories.index", []);
+        } catch (\Exception $e) {
+            return $this->json($e->getMessage(), [], 422);
+        }
+    }
+    public function list(Request $request) {
+        try {
+            $list = CategoryRepository::list($request);
+            return $this->json("Fetch categories successfully.", [
+                "categories" => $list,
             ]);
         } catch (\Exception $e) {
-            //throw $th;
+            return $this->json($e->getMessage(), [], 422);
+        }
+
+    }
+
+    public function save(CreateOrEditRequest $request) {
+        try {
+            $category = CategoryRepository::save($request);
+            return $this->json("Category saved successfully.", [
+                "category" => $category,
+            ]);
+        } catch (\Exception $e) {
+            return $this->json($e->getMessage(), [], 422);
         }
     }
 
-    public function save() {
-        
+    public function delete(Request $request) {
+        try {
+            CategoryRepository::delete($request);
+            return $this->json("Category delete successfully.", []);
+        } catch (\Exception $e) {
+            return $this->json($e->getMessage(), [], 422);
+        }
     }
 
-    public function delete() {
-        
+    public function updateStatus(Request $request) {
+        try {
+            $category = CategoryRepository::updateStatus($request);
+            return $this->json("Category status updated successfully.", [
+                "category" => $category,
+            ]);
+        } catch (\Exception $e) {
+            return $this->json($e->getMessage(), [], 422);
+        }
     }
 }

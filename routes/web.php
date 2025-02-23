@@ -31,7 +31,10 @@ Route::name('admin.')->prefix('/admin')->group(function() {
 
     Route::name('category.')->prefix('/category')->group(function() {
         Route::get("/", [CategoryController::class, 'view'])->name("view");
-
+        Route::post("/list", [CategoryController::class, 'list'])->name("list");
+        Route::post("/save", [CategoryController::class, 'save'])->name("save");
+        Route::post("/delete", [CategoryController::class, 'delete'])->name("delete");
+        Route::post("/update-status", [CategoryController::class, 'updateStatus'])->name("update.status");
     });
 
 });
