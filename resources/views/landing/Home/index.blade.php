@@ -89,7 +89,7 @@
                             </div>
                             <div class="col text-center">
                                 <div class="rounded category-icon">
-                                    <img src="{{url('/assets/image/img/Black (4).png')}}" alt="Phone Services" class="img-fluid">
+                                    <img src="{{url('/assets/image/Black (4).png')}}" alt="Phone Services" class="img-fluid">
                                 </div>
                                 <p class="mt-2 small">Phone Services</p>
                             </div>
