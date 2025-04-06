@@ -1,0 +1,70 @@
+
+.hero-section {
+    background-color: #f8f9ff;
+    border-radius: 15px;
+    margin-top: 2rem;
+}
+
+.category-icon {
+    background-color: #f1f1f1;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.search-image {
+    width: 80px;
+    height: 70px;
+    background-color: #ededed;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 0 auto;
+    display: block;
+}
+
+.search-btn {
+    background-color: #0d6efd;
+    color: white;
+    text-decoration: none;
+    border-radius: 0 0 5px 5px;
+}
+
+.search-btn:hover {
+    color: white;
+}
+
+.city-card img {
+    height: 150px;
+    object-fit: cover;
+    width: 100%;
+}
+.card-img img {
+    height: 164px ;
+    width: 100% ;
+}
+
+@media (max-width: 767px) {
+    .navbar-form {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .navbar-form input,
+    .navbar-form button {
+        margin-bottom: 0.5rem;
+        width: 100%;
+    }
+
+    .category-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .search-image {
+        width: 70px;
+        height: 60px;
+    }
+}

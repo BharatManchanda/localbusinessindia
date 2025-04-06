@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
 {
     //
     public function home() {
-        return view("landing.home.index");
+        $catgories = CategoryRepository::getHomeCategory();
+        return view("landing.home.index", ['categories' => $catgories]);
     }
 }

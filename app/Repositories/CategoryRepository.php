@@ -36,6 +36,14 @@ class CategoryRepository {
         ]);
         return $category;
     }
+
+    public static function getHomeCategory() {
+        $categories = Category::where([
+            "status" => 1,
+            "is_visible_on_home" => 1,
+        ])->get();
+        return $categories;
+    }
 }
 
 ?>
