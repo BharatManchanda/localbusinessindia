@@ -53,12 +53,12 @@ class CategoryRepository {
             $query->with("media")->where([
                 ['status', '=', 1],
                 ['is_visible_on_home', '=', 1],
-            ]);
+            ])->take(3);
         }])->where([
             ['status', '=', 1],
             ['is_visible_on_home', '=', 1],
             ['parent_id', '=', 0],
-        ])->get();
+        ])->take(4)->get();
         return $categories;
     }
 }
