@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ asset('/assets/bootstrap-5.3.3-dist/css/bootstrap.css') }}"></link>
     <script src="{{ asset('/assets/bootstrap-5.3.3-dist/js/bootstrap.bundle.js') }}" ></script>
     @yield('import.header.files')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>@yield('title', 'My App')</title>
 </head>
 <body>

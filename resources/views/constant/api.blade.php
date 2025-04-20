@@ -3,11 +3,21 @@
         admin: {
             category: {
                 save:  async (data) => {
+                    const formData = new FormData();
+
+                    for (const key in data) {
+                        console.log(key,"::::key");
+                        
+                        if (data.hasOwnProperty(key)) {
+                            formData.append(key, data[key]);
+                        }
+                    }
+
                     const response = await fetch("{{route('admin.category.save')}}", {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(data)
+                        body: formData,
                     });
+                    
                     if (!response.ok) {
                         const errorData = await response.json(); // Parse error response
                         throw errorData;

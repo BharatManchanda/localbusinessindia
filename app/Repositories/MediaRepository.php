@@ -7,65 +7,42 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class MediaRepository
-{   
-    public static function create(UploadedFile $file, $path, $type = null) {
-        $src = Storage::put('/' . trim($path, '/'), $file, 'public');
-        return Media::create([
-            'extension' => $file->extension(),
-            'src' => $src,
-            'path' => $path,
+{
+    protected $disk = 'public'; // Change if you use a different disk
+
+    public function create(UploadedFile $file, $mediaable, string $folder = 'media'): Media {
+        $path = $file->store($folder, $this->disk);
+
+        return $mediaable->media()->create([
+            'file_name'     => $file->getClientOriginalName(),
+            'file_path'     => $path,
+            'mime_type'     => $file->getClientMimeType(),
         ]);
     }
 
-    // public static function storeByPath($filePath, $path, $type = null) {
-    //     // Read the file content from the provided path
-    //     $fileContents = file_get_contents($filePath);
-    //     $fileName = basename($filePath); // Get the filename
-
-    //     // Use Storage to put the file content into the specified directory
-    //     $src = Storage::put('/' . trim($path, '/') . '/' . $fileName, $fileContents, 'public');
-
-    //     // Return a new Media record with the stored file details
-    //     return self::create([
-    //         'extension' => pathinfo($filePath, PATHINFO_EXTENSION), // Get the extension from file path
-    //         'src' => $src,
-    //         'path' => $path,
-    //         'type' => $type,
-    //     ]);
-    // }
-
-    public static function update(UploadedFile $file, Media $media, $path) {
-        $src = Storage::put('/' . trim($path, '/'), $file, 'public');
-
-        if (Storage::exists($media->src)) {
-            Storage::delete($media->src);
+    public function update(Media $media, UploadedFile $file, string $folder = 'media'): Media
+    {
+        // Delete old file
+        if (Storage::disk($this->disk)->exists($media->file_path)) {
+            Storage::disk($this->disk)->delete($media->file_path);
         }
 
+        $path = $file->store($folder, $this->disk);
+
         $media->update([
-            'extension' => $file->extension(),
-            'src' => $src,
-            'path' => $path,
+            'file_name'     => $file->getClientOriginalName(),
+            'file_path'     => $path,
+            'mime_type'     => $file->getClientMimeType(),
         ]);
 
         return $media;
     }
 
-    // public static function updateOrCreateByRequest(UploadedFile $file, $path, $media = null, $type = null) {
-    //     $src = Storage::put('/' . trim($path, '/'), $file, 'public');
+    public function delete(Media $media): bool {
+        if (Storage::disk($this->disk)->exists($media->file_path)) {
+            Storage::disk($this->disk)->delete($media->file_path);
+        }
 
-    //     if ($media && Storage::exists($media->src)) {
-    //         Storage::delete($media->src);
-    //     }
-
-    //     $media = self::query()->updateOrCreate([
-    //         'id' => $media?->id ?? 0
-    //     ], [
-    //         'extension' => $file->extension(),
-    //         'src' => $src,
-    //         'path' => $path,
-    //         'type' => $type,
-    //     ]);
-
-    //     return $media;
-    // }
+        return $media->delete();
+    }
 }

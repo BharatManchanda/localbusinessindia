@@ -12,13 +12,24 @@ class CategoryRepository {
         return $list;
     }
 
-    public static function save(Request $request) {
+    public static function save(Request $request, MediaRepository $mediaRepo) {
         $data = $request->only(["title", "slug", "parent_id", "icon", "status", "is_visible_on_home"]);
         if ($request->id) {
             $category = Category::find($request->id);
             $category->update($data);
+
+            if ($request->hasFile('icon')) {
+                $existingMedia = $category->media()->first();
+    
+                if ($existingMedia) {
+                    $mediaRepo->update($existingMedia, $request->file('icon'), 'category');
+                } else {
+                    $mediaRepo->create($request->file('icon'), $category, 'category');
+                }
+            }
         } else {
             $category = Category::create($data);
+            $mediaRepo->create($request->file('icon'), $category, "category");
         }
         return $category;
     }
@@ -38,9 +49,15 @@ class CategoryRepository {
     }
 
     public static function getHomeCategory() {
-        $categories = Category::where([
-            "status" => 1,
-            "is_visible_on_home" => 1,
+        $categories = Category::with(['children' => function ($query) {
+            $query->with("media")->where([
+                ['status', '=', 1],
+                ['is_visible_on_home', '=', 1],
+            ]);
+        }])->where([
+            ['status', '=', 1],
+            ['is_visible_on_home', '=', 1],
+            ['parent_id', '=', 0],
         ])->get();
         return $categories;
     }

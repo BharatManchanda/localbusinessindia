@@ -27,13 +27,13 @@ class CreateOrEditRequest extends FormRequest
     {
         return [
             'parent_id' => ['nullable', 'integer', function ($attribute, $value, $fail) {
-                if ($value !== 0 && !DB::table('categories')->where('id', $value)->exists()) {
+                if (!is_null($value) && $value != 0 && !DB::table('categories')->where('id', $value)->exists()) {
                     $fail('The selected parent category does not exist.');
                 }
             }],
             'title' => ['required', 'string', 'max:255'],
-            'slug' => ['required', 'string', 'max:255', Rule::unique('categories', 'slug')->ignore($this->category)],
-            'icon' => ['required', 'string'],
+            'slug' => ['required', 'string', 'max:255', Rule::unique('categories', 'slug')->ignore($this->id)],
+            // 'icon' => ['required', 'string'],
             'status' => ['required', 'boolean'],
             'is_visible_on_home' => ['required', 'boolean'],
         ];

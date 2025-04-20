@@ -15,7 +15,7 @@
     </div>
     <div class="mb-3">
         <label for="status" class="form-label">Icon</label>
-        <input type="text" class="form-control" id="icon" placeholder="Enter Icon" oninput="createOrEdit.onChange('icon', this.value)">
+        <input class="form-control" type="file" id="formFile" oninput="createOrEdit.onChange('icon', this.files[0])">
         <span id="iconHelpInline" class="form-text text-danger"></span>
     </div>
     <div class="mb-3">

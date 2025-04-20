@@ -28,4 +28,10 @@ class Category extends Model
     {
         return $this->belongsTo(Category::class, 'parent_id');
     }
+
+    public function media() {
+        return $this->morphOne(Media::class, 'mediaable');
+        // return $this->morphMany(Media::class, 'mediaable');
+    }
+
 }

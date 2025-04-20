@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Category\CreateOrEditRequest;
 use Illuminate\Http\Request;
 use App\Repositories\CategoryRepository;
+use App\Repositories\MediaRepository;
+
 class CategoryController extends Controller
 {
     //
@@ -27,9 +29,9 @@ class CategoryController extends Controller
 
     }
 
-    public function save(CreateOrEditRequest $request) {
+    public function save(CreateOrEditRequest $request, MediaRepository $mediaRepo) {
         try {
-            $category = CategoryRepository::save($request);
+            $category = CategoryRepository::save($request, $mediaRepo);
             return $this->json("Category saved successfully.", [
                 "category" => $category,
             ]);

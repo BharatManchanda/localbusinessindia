@@ -41,120 +41,25 @@
     <section class="container my-4 my-md-5 py-3 py-md-4 bg-light rounded">
         <div class="row px-2 px-md-4">
             <!-- Daily Needs -->
-            <div class="col-md-6 mb-4">
-                <div class="card h-100 border-0">
-                    <div class="card-body">
-                        <h5 class="text-primary fw-bold mb-3 mb-md-4 text-center text-md-start">DAILY NEEDS</h5>
-                        <div class="row row-cols-3 g-2 g-md-3">
-                            <div class="col text-center">
-                                <div class="rounded category-icon">
-                                    <img src="{{url('/assets/image/Black.png')}}" alt="Grocery" class="img-fluid">
-                                </div>
-                                <p class="mt-2 small">Grocery</p>
-                            </div>
-                            <div class="col text-center">
-                                <div class="rounded category-icon">
-                                    <img src="{{url('/assets/image/Black (1).png')}}" alt="Stationery" class="img-fluid">
-                                </div>
-                                <p class="mt-2 small">Stationery</p>
-                            </div>
-                            <div class="col text-center">
-                                <div class="rounded category-icon">
-                                    <img src="{{url('/assets/image/Cleaning.png')}}" alt="Cleaning" class="img-fluid">
-                                </div>
-                                <p class="mt-2 small">Cleaning</p>
+            @foreach($categories as $category)
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 border-0">
+                        <div class="card-body">
+                            <h5 class="text-primary fw-bold mb-3 mb-md-4 text-center text-md-start">{{$category->title}}</h5>
+                            <div class="row row-cols-3 g-2 g-md-3">
+                                @foreach($category->children as $child)
+                                    <div class="col text-center">
+                                        <div class="rounded category-icon">
+                                            <img src="{{url("/storage/{$child->media->file_path}")}}" alt="Grocery" class="img-fluid">
+                                        </div>
+                                        <p class="mt-2 small">{{$child->title}}</p>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Repair & Services -->
-            <div class="col-md-6 mb-4">
-                <div class="card h-100 border-0">
-                    <div class="card-body">
-                        <h5 class="text-primary fw-bold mb-3 mb-md-4 text-center text-md-start">REPAIR & SERVICES</h5>
-                        <div class="row row-cols-3 g-2 g-md-3">
-                            <div class="col text-center">
-                                <div class="rounded category-icon">
-                                    <img src="{{url('/assets/image/Black (2).png')}}" alt="AC Services" class="img-fluid">
-                                </div>
-                                <p class="mt-2 small">AC Services</p>
-                            </div>
-                            <div class="col text-center">
-                                <div class="rounded category-icon">
-                                    <img src="{{url('/assets/image/Black (3).png')}}" alt="Car Services" class="img-fluid">
-                                </div>
-                                <p class="mt-2 small">Car Services</p>
-                            </div>
-                            <div class="col text-center">
-                                <div class="rounded category-icon">
-                                    <img src="{{url('/assets/image/Black (4).png')}}" alt="Phone Services" class="img-fluid">
-                                </div>
-                                <p class="mt-2 small">Phone Services</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Wedding Requisites -->
-            <div class="col-md-6 mb-4">
-                <div class="card h-100 border-0">
-                    <div class="card-body">
-                        <h5 class="text-primary fw-bold mb-3 mb-md-4 text-center text-md-start">WEDDING REQUISITES</h5>
-                        <div class="row row-cols-3 g-2 g-md-3">
-                            <div class="col text-center">
-                                <div class="rounded category-icon">
-                                    <img src="{{url('/assets/image/Black (5).png')}}" alt="Banquet Halls" class="img-fluid">
-                                </div>
-                                <p class="mt-2 small">Banquet Halls</p>
-                            </div>
-                            <div class="col text-center">
-                                <div class="rounded category-icon">
-                                    <img src="{{url('/assets/image/Group 79.png')}}" alt="Bridal Requisites" class="img-fluid">
-                                </div>
-                                <p class="mt-2 small">Bridal Req.</p>
-                            </div>
-                            <div class="col text-center">
-                                <div class="rounded category-icon">
-                                    <img src="{{url('/assets/image/coock.png')}}" alt="Caterers" class="img-fluid">
-                                </div>
-                                <p class="mt-2 small">Caterers</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Beauty & Spa -->
-            <div class="col-md-6 mb-4">
-                <div class="card h-100 border-0">
-                    <div class="card-body">
-                        <h5 class="text-primary fw-bold mb-3 mb-md-4 text-center text-md-start">BEAUTY & SPA</h5>
-                        <div class="row row-cols-3 g-2 g-md-3">
-                            <div class="col text-center">
-                                <div class="rounded category-icon">
-                                    <img src="{{url('/assets/image/Black (6).png')}}" alt="Beauty Parlors" class="img-fluid">
-                                </div>
-                                <p class="mt-2 small">Beauty Parlors</p>
-                            </div>
-                            <div class="col text-center">
-                                <div class="rounded category-icon">
-                                    <img src="{{url('/assets/image/Black (7).png')}}" alt="Spa & Massages" class="img-fluid">
-                                </div>
-                                <p class="mt-2 small">Spa & Massage</p>
-                            </div>
-                            <div class="col text-center">
-                                <div class="rounded category-icon">
-                                    <img src="{{url('/assets/image/Black (8).png')}}" alt="Salons" class="img-fluid">
-                                </div>
-                                <p class="mt-2 small">Salons</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
 

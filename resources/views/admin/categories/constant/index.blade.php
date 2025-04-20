@@ -86,9 +86,8 @@
                 var modal = bootstrap.Modal.getInstance(document.getElementById("create-category"));
                 modal.hide();
                 showToast(response.message, 'primary');
+                document.querySelector(".modal-backdrop").remove();
             } catch (error) {
-                console.log(error,"::errorerrorerror");
-                
                 createOrEdit.setError(error.errors);
                 createOrEdit.loading = false;
                 createOrEdit.toggleButton();
@@ -162,7 +161,7 @@
                                                         <td style="width: 10%" class="text-center">${child.is_visible_on_home ? '<i class="bi bi-check-lg text-success"></i>': '<i class="bi bi-x text-danger"></i>'}</td>
                                                         <td style="width: 10%">
                                                             <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox" onclick="changeStatus.onClick(${child.id}, ${!child.status})" role="switch" id="flexSwitchCheckDefault">
+                                                                <input class="form-check-input" type="checkbox" ${child.status == 1 ? 'checked' : ''} onclick="changeStatus.onClick(${child.id}, ${!child.status})" role="switch" id="flexSwitchCheckDefault">
                                                             </div>
                                                         </td>
                                                         <td style="width: 20%">
