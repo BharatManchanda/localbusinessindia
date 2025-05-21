@@ -17,11 +17,13 @@ return new class extends Migration
             $table->string("slug");
             $table->string("email");
             $table->string("phone");
-            $table->string("website")->nullable();
             $table->bigInteger("category_id");
+            $table->bigInteger("sub_category_id");
             $table->string("city");
-            $table->string("address");
-            $table->json("links")->nullable();
+            $table->string("business_address");
+            $table->string("website")->nullable();
+            $table->string("instagram_url")->nullable();;
+            $table->string("facebook_url")->nullable();;
             $table->tinyInteger("status")->default(0);
             $table->softDeletes();
             $table->timestamps();

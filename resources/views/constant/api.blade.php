@@ -6,8 +6,6 @@
                     const formData = new FormData();
 
                     for (const key in data) {
-                        console.log(key,"::::key");
-                        
                         if (data.hasOwnProperty(key)) {
                             formData.append(key, data[key]);
                         }
@@ -50,5 +48,31 @@
                 }
             }
         },
+
+        landing: {
+            business: {
+                save:  async (data) => {
+                    const formData = new FormData();
+
+                    for (const key in data) {
+                        if (data.hasOwnProperty(key)) {
+                            formData.append(key, data[key]);
+                        }
+                    }
+
+                    const response = await fetch("{{route('landing.business.save')}}", {
+                        method: 'POST',
+                        body: formData,
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json(); // Parse error response
+                        throw errorData;
+                    }
+
+                    return response.json();
+                }
+            }
+        }
     }
 </script>

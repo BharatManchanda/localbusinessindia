@@ -6,6 +6,19 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryRepository {
+    public static function getAll() {
+        $categories = Category::with(['children' => function ($query) {
+            $query->with("media")->where([
+                ['status', '=', 1],
+                ['is_visible_on_home', '=', 1],
+            ]);
+        }])->where([
+            ['status', '=', 1],
+            ['is_visible_on_home', '=', 1],
+            ['parent_id', '=', 0],
+        ])->get();
+        return $categories;
+    }
     public static function list(Request $request) {
         $row_per_page = $request->input("row_per_page", 10);
         $list = Category::with('children')->where('parent_id', 0)->latest()->paginate($row_per_page);

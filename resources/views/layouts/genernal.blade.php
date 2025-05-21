@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-2 py-lg-3">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">Local <span class="text-primary">Business</span> India</a>
+            <a class="navbar-brand fw-bold" href="{{route('landing.home')}}">Local <span class="text-primary">Business</span> India</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -26,7 +26,7 @@
                         <button class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                     <div class="ms-lg-3 mt-2 mt-lg-0 d-flex">
-                        <a href="#" class="text-primary me-3 mb-2 mb-lg-0">Free Listing</a>
+                        <a href="{{route('landing.business.add')}}" class="text-primary me-3 mb-2 mb-lg-0">Free Listing</a>
                         <button class="btn btn-primary">Login/Sign up</button>
                     </div>
                 </div>

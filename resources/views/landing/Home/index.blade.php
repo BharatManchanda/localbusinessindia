@@ -1,6 +1,6 @@
 @extends('layouts.genernal')
 
-@section('title', 'Local Business India | Home')
+@section('title', 'Home | Local Business India')
 @section('import.header.files')
     <link rel="stylesheet" href="{{url('/assets/css/home.css')}}">
 @endsection

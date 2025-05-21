@@ -2,53 +2,32 @@
 
 namespace App\Repositories;
 
-use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Models\Business;
+use Illuminate\Support\Str;
 
-class BusinessRepository {
-    public static function list(Request $request) {
-        $row_per_page = $request->input("row_per_page", 10);
-        $list = Category::with('children')->where('parent_id', 0)->latest()->paginate($row_per_page);
-        return $list;
-    }
+class BusinessRepository
+{
+    /**
+     * Store a new business record.
+     */
+    public function save(array $data): Business {
+        // Handle file upload
+        // if (isset($data['business_logo']) && $data['business_logo']->isValid()) {
+        //     $file = $data['business_logo'];
+        //     $fileName = time() . '_' . Str::slug($data['name']) . '.' . $file->getClientOriginalExtension();
+        //     $filePath = $file->storeAs('business_logos', $fileName, 'public');
 
-    public static function save(Request $request) {
-        $data = $request->only([
-            "name",
-            "email",
-            "phone",
-            "website",
-            "category_id",
-            "city",
-            "address",
-            "links",
-            "status",
-        ]);
-        if ($request->id) {
-            $category = Category::find($request->id);
-            $category->update($data);
-        } else {
-            $category = Category::create($data);
+        //     $data['logo_path'] = $filePath;
+        // }
+        
+        // Generate a slug if not passed
+        if (!isset($data['slug']) || empty($data['slug'])) {
+            $data['slug'] = Str::slug($data['name']);
         }
-        if ($request->hasFile('logo')) {
-            
-        }
-        return $category;
-    }
 
-    public static function delete(Request $request) {
-        $category = Category::find($request->id);
-        $category->delete();
-        return true;
-    }
+        // Remove unnecessary fields
+        unset($data['business_logo'], $data['declaration']);
 
-    public static function updateStatus(Request $request) {
-        $category = Category::find($request->id);
-        $category->update([
-            "status" => $request->status,
-        ]);
-        return $category;
+        return Business::create($data);
     }
 }
-
-?>
