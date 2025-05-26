@@ -8,39 +8,40 @@ use Illuminate\Support\Facades\Storage;
 
 class MediaRepository
 {
-    protected $disk = 'public'; // Change if you use a different disk
+    protected const DISK = 'public'; // Use constant instead of property
 
-    public function create(UploadedFile $file, $mediaable, string $folder = 'media'): Media {
-        $path = $file->store($folder, $this->disk);
+    public static function create(UploadedFile $file, $mediaable, string $folder = 'media'): Media
+    {
+        $path = $file->store($folder, self::DISK);
 
         return $mediaable->media()->create([
-            'file_name'     => $file->getClientOriginalName(),
-            'file_path'     => $path,
-            'mime_type'     => $file->getClientMimeType(),
+            'file_name' => $file->getClientOriginalName(),
+            'file_path' => $path,
+            'mime_type' => $file->getClientMimeType(),
         ]);
     }
 
-    public function update(Media $media, UploadedFile $file, string $folder = 'media'): Media
+    public static function update(Media $media, UploadedFile $file, string $folder = 'media'): Media
     {
-        // Delete old file
-        if (Storage::disk($this->disk)->exists($media->file_path)) {
-            Storage::disk($this->disk)->delete($media->file_path);
+        if (Storage::disk(self::DISK)->exists($media->file_path)) {
+            Storage::disk(self::DISK)->delete($media->file_path);
         }
 
-        $path = $file->store($folder, $this->disk);
+        $path = $file->store($folder, self::DISK);
 
         $media->update([
-            'file_name'     => $file->getClientOriginalName(),
-            'file_path'     => $path,
-            'mime_type'     => $file->getClientMimeType(),
+            'file_name' => $file->getClientOriginalName(),
+            'file_path' => $path,
+            'mime_type' => $file->getClientMimeType(),
         ]);
 
         return $media;
     }
 
-    public function delete(Media $media): bool {
-        if (Storage::disk($this->disk)->exists($media->file_path)) {
-            Storage::disk($this->disk)->delete($media->file_path);
+    public static function delete(Media $media): bool
+    {
+        if (Storage::disk(self::DISK)->exists($media->file_path)) {
+            Storage::disk(self::DISK)->delete($media->file_path);
         }
 
         return $media->delete();

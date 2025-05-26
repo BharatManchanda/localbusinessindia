@@ -29,7 +29,7 @@ class SaveBusinessRequest extends FormRequest
             'sub_category_id' => 'required|integer|exists:categories,id',
             'city' => 'required|string|max:255',
             'business_address' => 'required|string|max:500',
-            'website' => 'nullable|url|max:255',
+            // 'website' => 'nullable|url|max:255',
             'instagram_url' => 'nullable|url|max:255',
             'facebook_url' => 'nullable|url|max:255',
             'business_logo'    => 'required|image|mimes:jpg,jpeg,png|max:2048',

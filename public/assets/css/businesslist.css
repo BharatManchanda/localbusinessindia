@@ -1,0 +1,17 @@
+
+.bg-dark-blue {
+    background-color: #24344c;
+}
+.bg-orange {
+    background-color: #ff7f32;
+}
+.text-orange {
+    color: #ff7f32;
+}
+.banner {
+    background-image: url(img/bg.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    opacity: 0.5;
+}

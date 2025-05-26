@@ -23,10 +23,15 @@ use App\Http\Controllers\Admin\{
 
 Route::name('landing.')->group(function() {
     Route::get('/', [LandingController::class, 'home'])->name("home");
+
+    // Business
     Route::name('business.')->prefix('/business')->group(function() {
+        Route::get("/", [LandingController::class, 'businessListView'])->name("list");
         Route::get("/add", [LandingController::class, 'addBusiness'])->name("add");
         Route::post("/save", [LandingController::class, 'saveBusiness'])->name("save");
     });
+
+    // 
 });
 
 Route::name('admin.')->prefix('/admin')->group(function() {

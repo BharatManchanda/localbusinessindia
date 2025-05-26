@@ -29,9 +29,9 @@ class CategoryController extends Controller
 
     }
 
-    public function save(CreateOrEditRequest $request, MediaRepository $mediaRepo) {
+    public function save(CreateOrEditRequest $request) {
         try {
-            $category = CategoryRepository::save($request, $mediaRepo);
+            $category = CategoryRepository::save($request);
             return $this->json("Category saved successfully.", [
                 "category" => $category,
             ]);

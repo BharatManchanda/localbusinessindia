@@ -25,25 +25,30 @@ class CategoryRepository {
         return $list;
     }
 
-    public static function save(Request $request, MediaRepository $mediaRepo) {
-        $data = $request->only(["title", "slug", "parent_id", "icon", "status", "is_visible_on_home"]);
+    public static function save(Request $request): Category {
+        $data = $request->only([
+            "title", "slug", "parent_id", "icon", "status", "is_visible_on_home"
+        ]);
         if ($request->id) {
             $category = Category::find($request->id);
             $category->update($data);
-
             if ($request->hasFile('icon')) {
                 $existingMedia = $category->media()->first();
-    
+
                 if ($existingMedia) {
-                    $mediaRepo->update($existingMedia, $request->file('icon'), 'category');
+                    MediaRepository::update($existingMedia, $request->file('icon'), 'category');
                 } else {
-                    $mediaRepo->create($request->file('icon'), $category, 'category');
+                    MediaRepository::create($request->file('icon'), $category, 'category');
                 }
             }
         } else {
             $category = Category::create($data);
-            $mediaRepo->create($request->file('icon'), $category, "category");
+
+            if ($request->hasFile('icon')) {
+                MediaRepository::create($request->file('icon'), $category, 'category');
+            }
         }
+
         return $category;
     }
 

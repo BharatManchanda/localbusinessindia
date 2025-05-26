@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Business\SaveBusinessRequest;
-use App\Repositories\CategoryRepository;
+use App\Repositories\{CategoryRepository, BusinessRepository};
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -11,9 +11,13 @@ class LandingController extends Controller
     //
     public function home() {
         $catgories = CategoryRepository::getHomeCategory();
+        // dd($catgories);
         return view("landing.home.index", ['categories' => $catgories]);
     }
 
+    public function businessListView() {
+        return view("landing.business.list.index");
+    }
 
     public function addBusiness() {
         $categories = CategoryRepository::getAll();
@@ -23,6 +27,19 @@ class LandingController extends Controller
     }
 
     public function saveBusiness(SaveBusinessRequest $request) {
-        dd($request->all());
+        try {
+            $data = $request->all(); // Includes file and all fields
+            $business = BusinessRepository::save($data);
+
+            return response()->json([
+                'message' => 'Business saved successfully.',
+                'data' => $business,
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Failed to save business.',
+                'errors' => ['general' => $th->getMessage()],
+            ], 500);
+        }
     }
 }
