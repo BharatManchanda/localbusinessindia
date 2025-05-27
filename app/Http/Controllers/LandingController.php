@@ -35,11 +35,28 @@ class LandingController extends Controller
                 'message' => 'Business saved successfully.',
                 'data' => $business,
             ]);
-        } catch (\Throwable $th) {
+        } catch (\Exception $th) {
             return response()->json([
                 'message' => 'Failed to save business.',
                 'errors' => ['general' => $th->getMessage()],
-            ], 500);
+            ], 422);
+        }
+    }
+
+    public function getBusinessList(Request $request) {
+        try {
+            $data = $request->all(); // Includes file and all fields
+            $business = BusinessRepository::getList($data);
+
+            return response()->json([
+                'message' => 'Business list fetched successfully.',
+                'data' => $business,
+            ]);
+        } catch (\Exception $th) {
+            return response()->json([
+                'message' => 'Failed to get business list.',
+                'errors' => ['general' => $th->getMessage()],
+            ], 422);
         }
     }
 }

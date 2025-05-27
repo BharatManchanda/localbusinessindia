@@ -109,5 +109,50 @@
                 createOrEdit.toggleButton();
             }
         }
+    },
+
+    const list = {
+        formData = {
+
+        },
+        populate: (businesses) => {
+            let html = businesses.data.map((business, key) => {
+                return (`
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-5">
+                                <img src="img/card-img.jpg" class="img-fluid rounded-start" alt="Electrician">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body">
+                                    <h5 class="card-title">${business.name}</h5>
+                                    <p class="card-text">Main Road Mohali Sector 91</p>
+                                    <span class="badge bg-orange text-white me-2">3.8 ⭐ (10)</span>
+                                    <span class="text-success fw-bold">✔ Verified</span>
+                                    <div class="mt-3">
+                                        <button class="btn btn-success btn-sm me-2">📞 0123456789</button>
+                                        <button class="btn btn-warning btn-sm">Send Enquiry</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `)
+            }).join(``);
+
+            categories.data.length == 0 && (html = `<tr><td colspan="7" class="text-center">No business exists!</td></tr>`)
+            document.querySelector("#business-list").innerHTML = html;
+        },
+        loading: false,
+        fetchBusinessList: async () => {
+            try {
+                list.loading = true;
+                let response = await api.landing.business.save(list.formData);
+                populateList(response)
+            } catch (error) {
+
+            }
+
+        }
     }
 </script>

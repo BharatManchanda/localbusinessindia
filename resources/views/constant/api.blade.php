@@ -71,7 +71,15 @@
                     }
 
                     return response.json();
-                }
+                },
+                list:  async (data) => {
+                    const response = await fetch("{{route('landing.business.get.list')}}", {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    return response.json();
+                },
             }
         }
     }

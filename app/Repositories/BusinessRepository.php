@@ -34,4 +34,9 @@ class BusinessRepository
 
         return $business;
     }
+
+    public function getList($data) {
+        $business = Business::pagininate(10);
+        return $business;
+    }
 }

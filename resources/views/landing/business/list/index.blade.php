@@ -43,12 +43,12 @@
     </div>
     
     <!-- Main Content -->
-    <div class="container mb-4">
+    <div class="container mb-4" id="business-list">
         <div class="row">
             <!-- Listings -->
-            <div class="col-lg-8">
+            <div class="col-lg-8" id="business-list">
                 <!-- Listing Card 1 -->
-                <div class="card mb-3">
+                {{-- <div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-5">
                             <img src="img/card-img.jpg" class="img-fluid rounded-start" alt="Electrician">
@@ -66,10 +66,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 
                 <!-- Listing Card 2 -->
-                <div class="card mb-3">
+                {{-- <div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-5">
                             <img src="img/card-img.jpg" class="img-fluid rounded-start" alt="Electrician">
@@ -87,10 +87,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 
                 <!-- Listing Card 3 -->
-                <div class="card mb-3">
+                {{-- <div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-5">
                             <img src="img/card-img.jpg" class="img-fluid rounded-start" alt="Electrician">
@@ -108,7 +108,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             
             <!-- Inquiry Sidebar -->
