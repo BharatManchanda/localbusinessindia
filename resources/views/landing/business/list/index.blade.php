@@ -1,11 +1,10 @@
+@include("landing.business.constant.index")
 @extends('layouts.genernal')
-
 @section('title', 'Business List | Local Business India')
 @section('import.header.files')
     <link rel="stylesheet" href="{{url('/assets/css/businesslist.css')}}">
     <style>
         /* Minimal custom styles that can't be achieved with Bootstrap alone */
-        
     </style>
 @endsection
 @section('content')
@@ -43,7 +42,7 @@
     </div>
     
     <!-- Main Content -->
-    <div class="container mb-4" id="business-list">
+    <div class="container mb-4">
         <div class="row">
             <!-- Listings -->
             <div class="col-lg-8" id="business-list">
@@ -169,4 +168,8 @@
             <button class="btn btn-dark mt-2 mt-md-0">📧 Subscribe now</button>
         </div>
     </div>
+    @include("landing.business.constant.index")
+    <script>
+        list.fetch();
+    </script>
 @endsection

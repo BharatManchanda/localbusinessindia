@@ -35,10 +35,10 @@ class LandingController extends Controller
                 'message' => 'Business saved successfully.',
                 'data' => $business,
             ]);
-        } catch (\Exception $th) {
+        } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Failed to save business.',
-                'errors' => ['general' => $th->getMessage()],
+                'errors' => ['general' => $e->getMessage()],
             ], 422);
         }
     }
@@ -52,10 +52,10 @@ class LandingController extends Controller
                 'message' => 'Business list fetched successfully.',
                 'data' => $business,
             ]);
-        } catch (\Exception $th) {
+        } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Failed to get business list.',
-                'errors' => ['general' => $th->getMessage()],
+                'errors' => ['general' => $e->getMessage()],
             ], 422);
         }
     }

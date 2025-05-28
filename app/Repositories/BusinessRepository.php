@@ -35,8 +35,8 @@ class BusinessRepository
         return $business;
     }
 
-    public function getList($data) {
-        $business = Business::pagininate(10);
+    public static function getList($data) {
+        $business = Business::paginate($data['rowPerPage']);
         return $business;
     }
 }

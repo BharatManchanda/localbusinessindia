@@ -18,7 +18,6 @@
             declaration: 0,
             _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
-        categoryData: @json($categories),
         errors:{},
         loading: false,
         reset : () => {
@@ -109,14 +108,17 @@
                 createOrEdit.toggleButton();
             }
         }
-    },
+    };
 
     const list = {
-        formData = {
-
+        formData: {
+            page: 1,
+            rowPerPage: 10,
+            _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
+        loading: false,
         populate: (businesses) => {
-            let html = businesses.data.map((business, key) => {
+            let html = businesses.data.data.map((business, key) => {
                 return (`
                     <div class="card mb-3">
                         <div class="row g-0">
@@ -140,19 +142,17 @@
                 `)
             }).join(``);
 
-            categories.data.length == 0 && (html = `<tr><td colspan="7" class="text-center">No business exists!</td></tr>`)
+            businesses.data.data.length == 0 && (html = `<tr><td colspan="7" class="text-center">No business exists!</td></tr>`)
             document.querySelector("#business-list").innerHTML = html;
         },
-        loading: false,
-        fetchBusinessList: async () => {
+        fetch: async () => {
             try {
                 list.loading = true;
-                let response = await api.landing.business.save(list.formData);
-                populateList(response)
+                let response = await api.landing.business.list(list.formData);
+                list.populate(response)
             } catch (error) {
 
             }
-
         }
     }
 </script>
