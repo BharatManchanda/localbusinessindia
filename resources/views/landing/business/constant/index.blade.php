@@ -2,6 +2,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <script>
     const createOrEdit = {
+        categoryData: @json($categories?? []),
         formData: {
             id: null,
             name: "",
@@ -20,7 +21,9 @@
         },
         errors:{},
         loading: false,
-        reset : () => {
+        reset: () => {
+            alert("ok");
+
             createOrEdit.formData = {
                 id: null,
                 name: "",
@@ -36,20 +39,46 @@
                 business_logo: "",
                 declaration: 0,
                 _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            alert("ok");
+            let fields = ["id", "name", "email", "phone", "website", "category_id", "sub_category_id", "city", "business_address", "instagram_url", "facebook_url"];
+            fields.forEach(field => {
+                const input = document.querySelector(`[name=${field}]`);
+                if (input) {
+                    input.value = createOrEdit.formData[field] ?? "";
+                }
+            });
+
+            // Special handling for textarea
+            let addressField = document.querySelector(`[name="business_address"]`);
+            if (addressField) {
+                addressField.value = createOrEdit.formData.business_address ?? "";
+            }
+
+            // Reset file input
+            let logoInput = document.querySelector(`[name="business_logo"]`);
+            if (logoInput) {
+                logoInput.value = "";
+            }
+
+            // Reset checkbox
+            let declarationCheckbox = document.getElementById("declaration");
+            if (declarationCheckbox) {
+                declarationCheckbox.checked = !!createOrEdit.formData.declaration;
             }
         },
         populateError: () => {
-            document.getElementById("nameHelpInline").innerHTML = createOrEdit.errors.name ?? "";
-            document.getElementById("emailHelpInline").innerHTML = createOrEdit.errors.email ?? "";
-            document.getElementById("phoneHelpInline").innerHTML = createOrEdit.errors.phone ?? "";
-            document.getElementById("category_idHelpInline").innerHTML = createOrEdit.errors.category_id ?? "";
-            document.getElementById("sub_category_idHelpInline").innerHTML = createOrEdit.errors.sub_category_id ?? "";
-            document.getElementById("cityHelpInline").innerHTML = createOrEdit.errors.city ?? "";
-            document.getElementById("business_addressHelpInline").innerHTML = createOrEdit.errors.business_address ?? "";
-            document.getElementById("instagram_urlHelpInline").innerHTML = createOrEdit.errors.instagram_url ?? "";
-            document.getElementById("facebook_urlHelpInline").innerHTML = createOrEdit.errors.facebook_url ?? "";
-            document.getElementById("business_logoHelpInline").innerHTML = createOrEdit.errors.business_logo ?? "";
-            document.getElementById("declarationHelpInline").innerHTML = createOrEdit.errors.declaration ?? "";
+            document.getElementById("nameHelpInline").innerHTML = createOrEdit.errors?.name ?? "";
+            document.getElementById("emailHelpInline").innerHTML = createOrEdit.errors?.email ?? "";
+            document.getElementById("phoneHelpInline").innerHTML = createOrEdit.errors?.phone ?? "";
+            document.getElementById("category_idHelpInline").innerHTML = createOrEdit.errors?.category_id ?? "";
+            document.getElementById("sub_category_idHelpInline").innerHTML = createOrEdit.errors?.sub_category_id ?? "";
+            document.getElementById("cityHelpInline").innerHTML = createOrEdit.errors?.city ?? "";
+            document.getElementById("business_addressHelpInline").innerHTML = createOrEdit.errors?.business_address ?? "";
+            document.getElementById("instagram_urlHelpInline").innerHTML = createOrEdit.errors?.instagram_url ?? "";
+            document.getElementById("facebook_urlHelpInline").innerHTML = createOrEdit.errors?.facebook_url ?? "";
+            document.getElementById("business_logoHelpInline").innerHTML = createOrEdit.errors?.business_logo ?? "";
+            document.getElementById("declarationHelpInline").innerHTML = createOrEdit.errors?.declaration ?? "";
         },
         setError:(error) => {
             createOrEdit.errors=error
@@ -101,6 +130,7 @@
                 let response = await api.landing.business.save(createOrEdit.formData);
                 createOrEdit.loading = false;
                 createOrEdit.toggleButton();
+                createOrEdit.reset();
                 showToast(response.message, 'primary');
             } catch (error) {
                 createOrEdit.setError(error.errors);
@@ -119,6 +149,10 @@
         loading: false,
         populate: (businesses) => {
             let html = businesses.data.data.map((business, key) => {
+                console.log(business,"::business");
+                const businessDetailRoute = "{{ route('landing.business.detail', ['slug' => ':slug']) }}";
+                let route = businessDetailRoute.replace(":slug", business.slug);
+
                 return (`
                     <div class="card mb-3">
                         <div class="row g-0">
@@ -127,12 +161,14 @@
                             </div>
                             <div class="col-md-7">
                                 <div class="card-body">
-                                    <h5 class="card-title">${business.name}</h5>
-                                    <p class="card-text">Main Road Mohali Sector 91</p>
+                                    <a href="${route}" class="text-reset text-decoration-none text-capitalize">
+                                        <h5 class="card-title text-capitalize">${business.name}</h5>
+                                    </a>
+                                    <p class="card-text text-capitalize">${business.business_address} - ${business.city}</p>
                                     <span class="badge bg-orange text-white me-2">3.8 ⭐ (10)</span>
                                     <span class="text-success fw-bold">✔ Verified</span>
                                     <div class="mt-3">
-                                        <button class="btn btn-success btn-sm me-2">📞 0123456789</button>
+                                        <button class="btn btn-success btn-sm me-2">📞 ${business.phone}</button>
                                         <button class="btn btn-warning btn-sm">Send Enquiry</button>
                                     </div>
                                 </div>

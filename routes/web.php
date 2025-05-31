@@ -27,6 +27,7 @@ Route::name('landing.')->group(function() {
     // Business
     Route::name('business.')->prefix('/business')->group(function() {
         Route::get("/", [LandingController::class, 'businessListView'])->name("list");
+        Route::get("/detail/{slug}", [LandingController::class, 'businessDetail'])->name("detail");
         Route::get("/add", [LandingController::class, 'addBusiness'])->name("add");
         Route::post("/get-list", [LandingController::class, 'getBusinessList'])->name("get.list");
         Route::post("/save", [LandingController::class, 'saveBusiness'])->name("save");

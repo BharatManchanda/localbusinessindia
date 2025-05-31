@@ -44,70 +44,8 @@
     <!-- Main Content -->
     <div class="container mb-4">
         <div class="row">
-            <!-- Listings -->
             <div class="col-lg-8" id="business-list">
-                <!-- Listing Card 1 -->
-                {{-- <div class="card mb-3">
-                    <div class="row g-0">
-                        <div class="col-md-5">
-                            <img src="img/card-img.jpg" class="img-fluid rounded-start" alt="Electrician">
-                        </div>
-                        <div class="col-md-7">
-                            <div class="card-body">
-                                <h5 class="card-title">Ananya Electrical</h5>
-                                <p class="card-text">Main Road Mohali Sector 91</p>
-                                <span class="badge bg-orange text-white me-2">3.8 ⭐ (10)</span>
-                                <span class="text-success fw-bold">✔ Verified</span>
-                                <div class="mt-3">
-                                    <button class="btn btn-success btn-sm me-2">📞 0123456789</button>
-                                    <button class="btn btn-warning btn-sm">Send Enquiry</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-                
-                <!-- Listing Card 2 -->
-                {{-- <div class="card mb-3">
-                    <div class="row g-0">
-                        <div class="col-md-5">
-                            <img src="img/card-img.jpg" class="img-fluid rounded-start" alt="Electrician">
-                        </div>
-                        <div class="col-md-7">
-                            <div class="card-body">
-                                <h5 class="card-title">Ananya Electrical</h5>
-                                <p class="card-text">Main Road Mohali Sector 91</p>
-                                <span class="badge bg-orange text-white me-2">3.8 ⭐ (10)</span>
-                                <span class="text-success fw-bold">✔ Verified</span>
-                                <div class="mt-3">
-                                    <button class="btn btn-success btn-sm me-2">📞 0123456789</button>
-                                    <button class="btn btn-warning btn-sm">Send Enquiry</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-                
-                <!-- Listing Card 3 -->
-                {{-- <div class="card mb-3">
-                    <div class="row g-0">
-                        <div class="col-md-5">
-                            <img src="img/card-img.jpg" class="img-fluid rounded-start" alt="Electrician">
-                        </div>
-                        <div class="col-md-7">
-                            <div class="card-body">
-                                <h5 class="card-title">Ananya Electrical</h5>
-                                <p class="card-text">Main Road Mohali Sector 91</p>
-                                <span class="badge bg-orange text-white me-2">3.8 ⭐ (10)</span>
-                                <span class="text-success fw-bold">✔ Verified</span>
-                                <div class="mt-3">
-                                    <button class="btn btn-success btn-sm me-2">📞 0123456789</button>
-                                    <button class="btn btn-warning btn-sm">Send Enquiry</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
+                <!-- Dynamic listing of business -->
             </div>
             
             <!-- Inquiry Sidebar -->

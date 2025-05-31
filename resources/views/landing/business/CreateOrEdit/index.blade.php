@@ -55,10 +55,7 @@
             <div class="col-md-6 mb-3">
                 <select class="form-select form-control" name="city" required oninput="createOrEdit.onChange('city', this.value)">
                     <option value="" selected disabled>Select city*</option>
-                    <option value="new-york">New York</option>
-                    <option value="los-angeles">Los Angeles</option>
-                    <option value="chicago">Chicago</option>
-                    <option value="houston">Houston</option>
+                    <option value="bathinda">Bathinda</option>
                 </select>
                 <span id="cityHelpInline" class="form-text text-danger"></span>
             </div>

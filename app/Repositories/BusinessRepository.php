@@ -12,7 +12,7 @@ class BusinessRepository
     public static function save(array $data): Business {
         $data['address'] = $data['business_address'] ?? null;
 
-        if ($data['id'] && $data['id'] != null) {
+        if ($data['id'] && $data['id'] != null && $data['id'] != 'null') {
             $business = Business::find($data['id']);
             $business->update($data);
 
@@ -36,7 +36,15 @@ class BusinessRepository
     }
 
     public static function getList($data) {
-        $business = Business::paginate($data['rowPerPage']);
+        $business = Business::with("media")
+        ->paginate($data['rowPerPage']);
+        return $business;
+    }
+    
+    public static function getDetail($slug) {
+        $business = Business::with("media")
+            ->where("slug", $slug)
+            ->first();
         return $business;
     }
 }

@@ -23,16 +23,17 @@ class Business extends Model
         'instagram_url',
         'facebook_url',
         'status',
+        'is_verified',
     ];
 
-    protected $cast = [
-        "links" => "array",
-    ];
-
-    public function getSlugOptions() : SlugOptions
-    {
+    public function getSlugOptions() : SlugOptions {
         return SlugOptions::create()
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
+    }
+
+    public function media() {
+        return $this->morphOne(Media::class, 'mediaable');
+        // return $this->morphMany(Media::class, 'mediaable');
     }
 }

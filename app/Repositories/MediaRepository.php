@@ -21,8 +21,7 @@ class MediaRepository
         ]);
     }
 
-    public static function update(Media $media, UploadedFile $file, string $folder = 'media'): Media
-    {
+    public static function update(Media $media, UploadedFile $file, string $folder = 'media'): Media {
         if (Storage::disk(self::DISK)->exists($media->file_path)) {
             Storage::disk(self::DISK)->delete($media->file_path);
         }
