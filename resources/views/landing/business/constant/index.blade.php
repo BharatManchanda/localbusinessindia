@@ -37,7 +37,7 @@
                 business_logo: "",
                 declaration: 0,
                 _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
+            };
             let fields = ["id", "name", "email", "phone", "website", "category_id", "sub_category_id", "city", "business_address", "instagram_url", "facebook_url"];
             fields.forEach(field => {
                 const input = document.querySelector(`[name=${field}]`);
