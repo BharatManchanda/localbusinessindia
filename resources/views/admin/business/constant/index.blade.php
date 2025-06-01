@@ -120,6 +120,7 @@
                 icon.classList.add('bi-chevron-down');
             }
         },
+        
         populate: (business) => {
             console.log(business,"::business");
             
@@ -128,15 +129,16 @@
                     `<tr>
                         <td>${business.id}</td>
                         <td>${business.name}</td>
-                        <td>${business.title}</td>
                         <td>${business.phone}</td>
                         <td>${business.city}</td>
-                        <td>${business.is_verify}</td>
-                        
+                        <td>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" ${business.status == 1 ? 'checked' : ''} onclick="changeStatus.onClick(${business.id}, this.checked ? true : false)" role="switch" id="flexSwitchCheckDefault">
+                            </div>
+                        </td>
                         <td>
                             <div class="d-flex align-items-center gap-2 cursor-pointer">
                                 <i class="bi bi-eye"></i>
-                                <i class="bi bi-pencil" data-bs-toggle="modal" data-bs-target="#create-business" onclick='createOrEdit.assignInitValue(${JSON.stringify(business)})'></i>
                                 <i class="bi bi-trash3" data-bs-toggle="modal" data-bs-target="#delete-business" onclick='deletebusiness.onOpen(${business.id})'></i>
                             </div>
                         </td>
@@ -144,9 +146,12 @@
                     `
                 );
             }).join('');
-            categories.data.length == 0 && (html = `<tr><td colspan="7" class="text-center">No data found</td></tr>`)
+            console.log(html);
+            
+            business.data.length == 0 && (html = `<tr><td colspan="7" class="text-center">No data found</td></tr>`)
             document.querySelector("#business-list").innerHTML = html;
         },
+
         populatePagination: (categories) => {
             let html = categories.links.map(link => {
                 let page = null;
@@ -163,14 +168,7 @@
             }).join("");
             document.querySelector("#categories-pagination").innerHTML = html;
         },
-        populateParent: (categories) => {
-            let html = categories.data.map(business => {
-                return (`
-                    <option value="${business.id}">${business.title}</option>
-                `)
-            }).join(``);
-            document.querySelector("#parent_id").innerHTML = html;
-        },
+
         fetch: async () => {
             try {
                 list.loading = true;
@@ -180,30 +178,6 @@
                 list.loading = false;
             } catch (error) {
                 list.loading = false;
-            }
-        }
-    }
-
-    const changeStatus = {
-        formData: {
-            id: 0,
-            status: 0,
-            _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        },
-        loading: false,
-        onClick: (id, status) => {
-            changeStatus.formData.id = id;
-            changeStatus.formData.status = status;
-            changeStatus.updateStatus();
-        },
-        updateStatus: async () => {
-            try {
-                changeStatus.loading = true;
-                let response = await api.admin.business.updateStatus(changeStatus.formData);
-                changeStatus.loading = false;
-                showToast(response.message, 'primary');
-            } catch (error) {
-                changeStatus.loading = false;
             }
         }
     }
@@ -226,6 +200,29 @@
                 showToast(response.message, 'primary');
             } catch (error) {
                 deletebusiness.loading = false;
+            }
+        }
+    }
+    const changeStatus = {
+        formData: {
+            id: 0,
+            status: 0,
+            _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        loading: false,
+        onClick: (id, status) => {
+            changeStatus.formData.id = id;
+            changeStatus.formData.status = status;
+            changeStatus.updateStatus();
+        },
+        updateStatus: async () => {
+            try {
+                changeStatus.loading = true;
+                let response = await api.admin.business.updateStatus(changeStatus.formData);
+                changeStatus.loading = false;
+                showToast(response.message, 'primary');
+            } catch (error) {
+                changeStatus.loading = false;
             }
         }
     }

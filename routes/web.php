@@ -46,10 +46,12 @@ Route::name('admin.')->prefix('/admin')->group(function() {
         Route::post("/delete", [CategoryController::class, 'delete'])->name("delete");
         Route::post("/update-status", [CategoryController::class, 'updateStatus'])->name("update.status");
     });
-
+    
     Route::name('business.')->prefix('/business')->group(function() {
         Route::get("/", [BusinessController::class, 'view'])->name("view");
         Route::post("/get-list", [BusinessController::class, 'list'])->name("list");
+        Route::post("/delete", [BusinessController::class, 'delete'])->name("delete");
+        Route::post("/update-status", [BusinessController::class, 'updateStatus'])->name("update.status");
     });
 });
 

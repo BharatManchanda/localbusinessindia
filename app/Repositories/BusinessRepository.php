@@ -40,6 +40,7 @@ class BusinessRepository
         $business = Business::with("media")
             ->whereIn("sub_category_id", $subCategoryIds)
             ->where("city", $location)
+            ->where("status", 1)
             ->paginate($data['rowPerPage'] ?? 10);
         return $business;
     }
@@ -55,5 +56,19 @@ class BusinessRepository
         $row_per_page = $data['row_per_page'] ?? 10;
         $list = Business::latest()->paginate($row_per_page);
         return $list;
+    }
+
+    public static function delete(Request $request) {
+        $category = Business::find($request->id);
+        $category->delete();
+        return true;
+    }
+
+    public static function updateStatus($data) {
+        $business = Business::find($data['id']);
+        $business->update([
+            "status" => $data['status'],
+        ]);
+        return $business;
     }
 }

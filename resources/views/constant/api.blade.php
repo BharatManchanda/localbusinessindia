@@ -55,6 +55,22 @@
                         body: JSON.stringify(data)
                     });
                     return response.json();
+                },
+                delete:  async (data) => {
+                    const response = await fetch("{{route('admin.business.delete')}}", {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    return response.json();
+                },
+                updateStatus:  async (data) => {
+                    const response = await fetch("{{route('admin.business.update.status')}}", {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    return response.json();
                 }
             }
         },

@@ -22,8 +22,6 @@
         errors:{},
         loading: false,
         reset: () => {
-            alert("ok");
-
             createOrEdit.formData = {
                 id: null,
                 name: "",
@@ -40,7 +38,6 @@
                 declaration: 0,
                 _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             },
-            alert("ok");
             let fields = ["id", "name", "email", "phone", "website", "category_id", "sub_category_id", "city", "business_address", "instagram_url", "facebook_url"];
             fields.forEach(field => {
                 const input = document.querySelector(`[name=${field}]`);

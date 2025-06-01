@@ -25,7 +25,6 @@ return new class extends Migration
             $table->string("instagram_url")->nullable();;
             $table->string("facebook_url")->nullable();;
             $table->tinyInteger("status")->default(0);
-            $table->tinyInteger("is_verified")->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

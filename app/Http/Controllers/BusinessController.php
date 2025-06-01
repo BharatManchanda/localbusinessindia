@@ -26,4 +26,25 @@ class BusinessController extends Controller
             return $this->json($e->getMessage(), [], 422);
         }
     }
+
+    public function delete(Request $request) {
+        try {
+            BusinessRepository::delete($request);
+            return $this->json("Business delete successfully.", []);
+        } catch (\Exception $e) {
+            return $this->json($e->getMessage(), [], 422);
+        }
+    }
+
+    public function updateStatus(Request $request) {
+        try {
+            $data = $request->all();
+            $business = BusinessRepository::updateStatus($data);
+            return $this->json("Business status updated successfully.", [
+                "business" => $business,
+            ]);
+        } catch (\Exception $e) {
+            return $this->json($e->getMessage(), [], 422);
+        }
+    }
 }

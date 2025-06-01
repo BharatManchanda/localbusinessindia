@@ -29,7 +29,7 @@
                                     <th scope="col" style="width:10%">ID</th>
                                     <th scope="col" style="width:20%">Name</th>
                                     <th scope="col" style="width:20%">Phone</th>
-                                    <th scope="col" style="width:10%" class="text-center">City</th>
+                                    <th scope="col" style="width:20%">City</th>
                                     <th scope="col" style="width:10%">Status</th>
                                     <th scope="col" style="width:20%">Action</th>
                                 </tr>
