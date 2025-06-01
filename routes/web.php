@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\{
     LandingController,
-    CategoryController
+    CategoryController,
+    BusinessController,
 };
 use Illuminate\Support\Facades\Route;
 
@@ -26,14 +27,10 @@ Route::name('landing.')->group(function() {
 
     // Business
     Route::name('business.')->prefix('/business')->group(function() {
-        Route::get("/", [LandingController::class, 'businessListView'])->name("list");
-        Route::get("/detail/{slug}", [LandingController::class, 'businessDetail'])->name("detail");
+        // Route::get("/detail/{slug}", [LandingController::class, 'businessDetail'])->name("detail");
         Route::get("/add", [LandingController::class, 'addBusiness'])->name("add");
-        Route::post("/get-list", [LandingController::class, 'getBusinessList'])->name("get.list");
         Route::post("/save", [LandingController::class, 'saveBusiness'])->name("save");
     });
-
-    // 
 });
 
 Route::name('admin.')->prefix('/admin')->group(function() {
@@ -50,4 +47,13 @@ Route::name('admin.')->prefix('/admin')->group(function() {
         Route::post("/update-status", [CategoryController::class, 'updateStatus'])->name("update.status");
     });
 
+    Route::name('business.')->prefix('/business')->group(function() {
+        Route::get("/", [BusinessController::class, 'view'])->name("view");
+        Route::post("/get-list", [BusinessController::class, 'list'])->name("list");
+    });
+});
+
+Route::name('landing.')->group(function() {
+    Route::get("/{subCategory}/{location}", [LandingController::class, 'businessListView'])->name("business.get.list");
+    Route::get("/{subCategory}/{location}/{slug}", [LandingController::class, 'businessDetail'])->name("business.get.detail");
 });

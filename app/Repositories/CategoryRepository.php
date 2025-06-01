@@ -19,6 +19,7 @@ class CategoryRepository {
         ])->get();
         return $categories;
     }
+
     public static function list(Request $request) {
         $row_per_page = $request->input("row_per_page", 10);
         $list = Category::with('children')->where('parent_id', 0)->latest()->paginate($row_per_page);

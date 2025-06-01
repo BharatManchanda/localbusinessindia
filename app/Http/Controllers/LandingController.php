@@ -11,12 +11,13 @@ class LandingController extends Controller
     //
     public function home() {
         $catgories = CategoryRepository::getHomeCategory();
-        // dd($catgories);
         return view("landing.home.index", ['categories' => $catgories]);
     }
 
-    public function businessListView() {
-        return view("landing.business.list.index");
+    public function businessListView(Request $request, $subCategory, $location) {
+        $data = $request->all();
+        $business = BusinessRepository::getList($data, $subCategory, $location);
+        return view("landing.business.list.index", ["businesses" => $business]);
     }
 
     public function addBusiness() {
@@ -43,10 +44,10 @@ class LandingController extends Controller
         }
     }
 
-    public function getBusinessList(Request $request) {
+    public function getBusinessList(Request $request, $subCategory, $location) {
         try {
             $data = $request->all(); // Includes file and all fields
-            $business = BusinessRepository::getList($data);
+            $business = BusinessRepository::getList($data, $subCategory, $location);
 
             return response()->json([
                 'message' => 'Business list fetched successfully.',
@@ -60,7 +61,7 @@ class LandingController extends Controller
         }
     }
 
-    public function businessDetail(Request $request, $slug) {
+    public function businessDetail(Request $request, $subCategory, $location, $slug) {
         try {
             $business = BusinessRepository::getDetail($slug);
             return view("landing.business.detail.index", [

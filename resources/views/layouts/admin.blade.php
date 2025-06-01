@@ -246,6 +246,12 @@
                                     <p>Category</p>
                                 </a>
                             </li>
+                             <li class="nav-item">
+                                <a href="{{route('admin.business.view')}}" class="nav-link {{request()->routeIs('admin.business.view') ? 'active' : ''}}">
+                                    <i class="nav-icon bi bi-bookmark-plus"></i>
+                                    <p>Business</p>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon bi bi-box-seam-fill"></i>

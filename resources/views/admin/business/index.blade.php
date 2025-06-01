@@ -1,5 +1,6 @@
+@include("admin.business.constant.index")
 @extends('layouts.admin')
-@section('title', 'Admin | Categories')
+@section('title', 'Admin | Business')
 
 @section('content')
     <main class="app-main">
@@ -7,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h3 class="mb-0">Categories</h3>
+                        <h3 class="mb-0">Busineses</h3>
                     </div>
                     <div class="col-sm-6 justify-content-end d-flex">
                         <button class="btn btn-primary" onclick="createOrEdit.assignInitValue()" data-bs-toggle="modal" data-bs-target="#create-category">
@@ -25,16 +26,15 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col" style="width:10%">#</th>
                                     <th scope="col" style="width:10%">ID</th>
-                                    <th scope="col" style="width:20%">Title</th>
-                                    <th scope="col" style="width:20%">Slug</th>
-                                    <th scope="col" style="width:10%" class="text-center">Home Screen</th>
+                                    <th scope="col" style="width:20%">Name</th>
+                                    <th scope="col" style="width:20%">Phone</th>
+                                    <th scope="col" style="width:10%" class="text-center">City</th>
                                     <th scope="col" style="width:10%">Status</th>
                                     <th scope="col" style="width:20%">Action</th>
                                 </tr>
                             </thead>
-                            <tbody id="categories-list">
+                            <tbody id="business-list">
                                 <!-- Dynamic Render -->
                             </tbody>
                         </table>
@@ -50,9 +50,9 @@
             </div>
         </div>
     </main>
-    <!-- @include("admin.categories.createOrEdit.index")
-    @include("admin.categories.delete.index")
+    {{-- @include("admin.business.createOrEdit.index")
+    @include("admin.business.delete.index") --}}
     <script>
         list.fetch();
-    </script> -->
+    </script>
 @endsection

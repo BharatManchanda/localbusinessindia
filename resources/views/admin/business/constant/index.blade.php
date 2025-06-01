@@ -27,13 +27,13 @@
             }
         },
         assignInitValue: (formData = null) => {
-            const modalTitle = document.querySelector("#create-category .modal-title"); 
+            const modalTitle = document.querySelector("#create-business .modal-title"); 
             if (formData == null) {
                 createOrEdit.reset();
                 formData = createOrEdit.formData;
-                modalTitle.innerText = "Create Category";
+                modalTitle.innerText = "Create business";
             } else  {
-                modalTitle.innerText = "Edit Category";
+                modalTitle.innerText = "Edit business";
             }
             createOrEdit.formData = {
                 ...createOrEdit.formData,
@@ -79,11 +79,11 @@
             try {
                 createOrEdit.loading = true;
                 createOrEdit.toggleButton();
-                let response = await api.admin.category.save(createOrEdit.formData);
+                let response = await api.admin.business.save(createOrEdit.formData);
                 createOrEdit.loading = false;
                 createOrEdit.toggleButton();
                 list.fetch();
-                var modal = bootstrap.Modal.getInstance(document.getElementById("create-category"));
+                var modal = bootstrap.Modal.getInstance(document.getElementById("create-business"));
                 modal.hide();
                 showToast(response.message, 'primary');
             } catch (error) {
@@ -120,65 +120,24 @@
                 icon.classList.add('bi-chevron-down');
             }
         },
-        populate: (categories) => {
-            let html = categories.data.map((category, key) => {
+        populate: (business) => {
+            console.log(business,"::business");
+            
+            let html = business.data.map((business, key) => {
                 return (
                     `<tr>
-                        <td scope="row">
-                            <i class="bi bi-chevron-right" onclick="list.toggleAccordion(${category.id})" id="toggle-icon-${category.id}" style="cursor: pointer;"></i>
-                        </td>
-                        <td scope="row">${category.id}</td>
-                        <td>${category.title}</td>
-                        <td>${category.slug}</td>
-                        <td class="text-center">
-                            ${category.is_visible_on_home ? '<i class="bi bi-check-lg text-success"></i>': '<i class="bi bi-x text-danger"></i>'}
-                        </td>
-                        <td>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" ${category.status == 1 ? 'checked' : ''} onclick="changeStatus.onClick(${category.id}, this.checked ? true : false)" role="switch" id="flexSwitchCheckDefault">
-                            </div>
-                        </td>
+                        <td>${business.id}</td>
+                        <td>${business.name}</td>
+                        <td>${business.title}</td>
+                        <td>${business.phone}</td>
+                        <td>${business.city}</td>
+                        <td>${business.is_verify}</td>
+                        
                         <td>
                             <div class="d-flex align-items-center gap-2 cursor-pointer">
                                 <i class="bi bi-eye"></i>
-                                <i class="bi bi-pencil" data-bs-toggle="modal" data-bs-target="#create-category" onclick='createOrEdit.assignInitValue(${JSON.stringify(category)})'></i>
-                                <i class="bi bi-trash3" data-bs-toggle="modal" data-bs-target="#delete-category" onclick='deleteCategory.onOpen(${category.id})'></i>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="7" class="p-0">
-                            <div id="accordion-${category.id}" class="accordion-collapse collapse" data-bs-parent="#accordion">
-                                <div class="accordion-body">
-                                    <table class="table m-0">
-                                        <tbody>
-                                            ${category.children.length ? category.children.map(child => {
-                                                return (
-                                                    `<tr>
-                                                        <td style="width: 10%"></td>
-                                                        <td style="width: 10%">${child.id}</td>
-                                                        <td style="width: 20%">${child.title}</td>
-                                                        <td style="width: 20%">${child.slug}</td>
-                                                        <td style="width: 10%" class="text-center">${child.is_visible_on_home ? '<i class="bi bi-check-lg text-success"></i>': '<i class="bi bi-x text-danger"></i>'}</td>
-                                                        <td style="width: 10%">
-                                                            <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox" onclick="changeStatus.onClick(${child.id}, ${!child.status})" role="switch" id="flexSwitchCheckDefault">
-                                                            </div>
-                                                        </td>
-                                                        <td style="width: 20%">
-                                                            <div class="d-flex align-items-center gap-2 cursor-pointer">
-                                                                <i class="bi bi-eye"></i>
-                                                                <i class="bi bi-pencil" data-bs-toggle="modal" data-bs-target="#create-category" onclick='createOrEdit.assignInitValue(${JSON.stringify(child)})'></i>
-                                                                <i class="bi bi-trash3" data-bs-toggle="modal" data-bs-target="#delete-category" onclick='deleteCategory.onOpen(${category.id})'></i>
-                                                            </div>
-                                                        </td>
-                                                    </tr>`
-                                                );
-                                            }).join('') : '<tr><td colspan="7" class="text-center">No data found</td></tr>'}
-
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <i class="bi bi-pencil" data-bs-toggle="modal" data-bs-target="#create-business" onclick='createOrEdit.assignInitValue(${JSON.stringify(business)})'></i>
+                                <i class="bi bi-trash3" data-bs-toggle="modal" data-bs-target="#delete-business" onclick='deletebusiness.onOpen(${business.id})'></i>
                             </div>
                         </td>
                     </tr>
@@ -186,7 +145,7 @@
                 );
             }).join('');
             categories.data.length == 0 && (html = `<tr><td colspan="7" class="text-center">No data found</td></tr>`)
-            document.querySelector("#categories-list").innerHTML = html;
+            document.querySelector("#business-list").innerHTML = html;
         },
         populatePagination: (categories) => {
             let html = categories.links.map(link => {
@@ -205,9 +164,9 @@
             document.querySelector("#categories-pagination").innerHTML = html;
         },
         populateParent: (categories) => {
-            let html = categories.data.map(category => {
+            let html = categories.data.map(business => {
                 return (`
-                    <option value="${category.id}">${category.title}</option>
+                    <option value="${business.id}">${business.title}</option>
                 `)
             }).join(``);
             document.querySelector("#parent_id").innerHTML = html;
@@ -215,10 +174,9 @@
         fetch: async () => {
             try {
                 list.loading = true;
-                let response = await api.admin.category.list(list.formData);
-                list.populate(response.data.categories)
-                list.populatePagination(response.data.categories)
-                list.populateParent(response.data.categories)
+                let response = await api.admin.business.list(list.formData);
+                list.populate(response.data.business)
+                list.populatePagination(response.data.business)
                 list.loading = false;
             } catch (error) {
                 list.loading = false;
@@ -241,7 +199,7 @@
         updateStatus: async () => {
             try {
                 changeStatus.loading = true;
-                let response = await api.admin.category.updateStatus(changeStatus.formData);
+                let response = await api.admin.business.updateStatus(changeStatus.formData);
                 changeStatus.loading = false;
                 showToast(response.message, 'primary');
             } catch (error) {
@@ -250,24 +208,24 @@
         }
     }
 
-    const deleteCategory = {
+    const deletebusiness = {
         formData: {
             id: 0,
             _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
         loading: false,
         onOpen: (id) => {
-            deleteCategory.formData.id = id;
+            deletebusiness.formData.id = id;
         },
         delete: async () => {
             try {
-                deleteCategory.loading = true;
-                let response = await api.admin.category.delete(deleteCategory.formData);
+                deletebusiness.loading = true;
+                let response = await api.admin.business.delete(deletebusiness.formData);
                 list.fetch();
-                var modal = bootstrap.Modal.getInstance(document.getElementById("delete-category"));
+                var modal = bootstrap.Modal.getInstance(document.getElementById("delete-business"));
                 showToast(response.message, 'primary');
             } catch (error) {
-                deleteCategory.loading = false;
+                deletebusiness.loading = false;
             }
         }
     }

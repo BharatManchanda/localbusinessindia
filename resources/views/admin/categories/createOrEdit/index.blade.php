@@ -1,4 +1,3 @@
-@include("admin.categories.constant.index")
 <x-modal id="create-category" title="Create Category">
     @csrf
     <input type="hidden" class="form-control" id="id" oninput="createOrEdit.onChange('id', this.value)">

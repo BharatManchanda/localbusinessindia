@@ -50,6 +50,7 @@
             </div>
         </div>
     </main>
+    @include("admin.categories.constant.index")
     @include("admin.categories.createOrEdit.index")
     @include("admin.categories.delete.index")
     <script>

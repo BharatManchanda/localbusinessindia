@@ -22,7 +22,7 @@
                     class="d-flex flex-column flex-lg-row align-items-start justify-content-between align-items-lg-center ms-auto mb-2 mb-lg-0 w-100 w-lg-auto">
                     <div class="d-flex flex-column flex-md-row w-50 mb-2 mb-lg-0 navbar-form">
                         <input class="form-control me-md-2 mb-2 mb-md-0" type="search" placeholder="Search here">
-                        <input class="form-control me-md-2 mb-2 mb-md-0" type="text" value="Mumbai">
+                        <input class="form-control me-md-2 mb-2 mb-md-0" type="text" value="Bathinda">
                         <button class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                     <div class="ms-lg-3 mt-2 mt-lg-0 d-flex">

@@ -46,6 +46,30 @@
         <div class="row">
             <div class="col-lg-8" id="business-list">
                 <!-- Dynamic listing of business -->
+                @foreach ($businesses as $business)
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-5">
+                                <img src='{{url("/storage/{$business->media->file_path}") }}' class="img-fluid rounded-start" alt="Electrician">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body">
+                                    <a href="{{ route('landing.business.get.detail', ['slug' => $business->slug, 'location' => $business->city, 'subCategory' => "business"]) }}" class="text-reset text-decoration-none text-capitalize">
+                                        <h5 class="card-title text-capitalize">{{ $business->name }}</h5>
+                                    </a>
+                                    <p class="card-text text-capitalize">{{ $business->business_address }} - {{ $business->city }}</p>
+                                    <span class="badge bg-orange text-white me-2">3.8 ⭐ (10)</span>
+                                    <span class="text-success fw-bold">✔ Verified</span>
+                                    <div class="mt-3">
+                                        <button class="btn btn-success btn-sm me-2">📞 {{$business->phone}}</button>
+                                        <button class="btn btn-warning btn-sm">Send Enquiry</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                <!-- Dynamic listing of business end -->
             </div>
             
             <!-- Inquiry Sidebar -->
@@ -106,8 +130,4 @@
             <button class="btn btn-dark mt-2 mt-md-0">📧 Subscribe now</button>
         </div>
     </div>
-    @include("landing.business.constant.index")
-    <script>
-        list.fetch();
-    </script>
 @endsection

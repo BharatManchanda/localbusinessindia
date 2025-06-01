@@ -26,7 +26,6 @@ class CategoryController extends Controller
         } catch (\Exception $e) {
             return $this->json($e->getMessage(), [], 422);
         }
-
     }
 
     public function save(CreateOrEditRequest $request) {

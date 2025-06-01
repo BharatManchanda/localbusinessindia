@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\Business;
+use App\Models\{Business, Category};
 
 class BusinessRepository
 {
@@ -35,9 +35,12 @@ class BusinessRepository
         return $business;
     }
 
-    public static function getList($data) {
+    public static function getList($data, $subCategory, $location) {
+        $subCategoryIds = Category::where("slug", $subCategory)->pluck("id");
         $business = Business::with("media")
-        ->paginate($data['rowPerPage']);
+            ->whereIn("sub_category_id", $subCategoryIds)
+            ->where("city", $location)
+            ->paginate($data['rowPerPage'] ?? 10);
         return $business;
     }
     
@@ -46,5 +49,11 @@ class BusinessRepository
             ->where("slug", $slug)
             ->first();
         return $business;
+    }
+
+    public static function list($data) {
+        $row_per_page = $data['row_per_page'] ?? 10;
+        $list = Business::latest()->paginate($row_per_page);
+        return $list;
     }
 }
