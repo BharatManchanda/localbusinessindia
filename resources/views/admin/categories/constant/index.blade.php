@@ -8,7 +8,7 @@
             parent_id:0,
             slug: "",
             icon: "",
-            status: 0,
+            status: 1,
             is_visible_on_home: 0,
             _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
@@ -48,12 +48,12 @@
             document.getElementById("is_visible_on_home").checked = formData.is_visible_on_home == 1;
         },
         populateError: () => {
-            document.getElementById("titleHelpInline").innerHTML = createOrEdit.errors.title ?? "";
-            document.getElementById("parentIdHelpInline").innerHTML = createOrEdit.errors.parent_id ?? "";
-            document.getElementById("iconHelpInline").innerHTML = createOrEdit.errors.icon ?? "";
-            document.getElementById("slugHelpInline").innerHTML = createOrEdit.errors.slug ?? "";
-            document.getElementById("statusHelpInline").innerHTML = createOrEdit.errors.status ?? "";
-            document.getElementById("isVisibleOnHomeHelpInline").innerHTML = createOrEdit.errors.is_visible_on_home ?? "";
+            document.getElementById("titleHelpInline").innerHTML = createOrEdit.errors?.title ?? "";
+            document.getElementById("parentIdHelpInline").innerHTML = createOrEdit.errors?.parent_id ?? "";
+            document.getElementById("iconHelpInline").innerHTML = createOrEdit.errors?.icon ?? "";
+            document.getElementById("slugHelpInline").innerHTML = createOrEdit.errors?.slug ?? "";
+            document.getElementById("statusHelpInline").innerHTML = createOrEdit.errors?.status ?? "";
+            document.getElementById("isVisibleOnHomeHelpInline").innerHTML = createOrEdit.errors?.is_visible_on_home ?? "";
         },
         setError:(error) => {
             createOrEdit.errors=error

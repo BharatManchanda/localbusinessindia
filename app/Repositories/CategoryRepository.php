@@ -10,7 +10,7 @@ class CategoryRepository {
         $childrenQuery = function ($query) use ($isAllActive) {
             $query->with("media")->where('status', 1);
 
-            if ($isAllActive) {
+            if (!$isAllActive) {
                 $query->where('is_visible_on_home', 1);
             }
         };
@@ -20,7 +20,7 @@ class CategoryRepository {
             ['parent_id', 0],
         ];
 
-        if ($isAllActive) {
+        if (!$isAllActive) {
             $whereConditions[] = ['is_visible_on_home', 1];
         }
 
