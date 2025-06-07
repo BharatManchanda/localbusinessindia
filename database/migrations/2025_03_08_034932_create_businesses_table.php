@@ -22,9 +22,10 @@ return new class extends Migration
             $table->string("city");
             $table->string("business_address");
             $table->string("website")->nullable();
-            $table->string("instagram_url")->nullable();;
-            $table->string("facebook_url")->nullable();;
+            $table->string("instagram_url")->nullable();
+            $table->string("facebook_url")->nullable();
             $table->tinyInteger("status")->default(0);
+            $table->string("password")->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

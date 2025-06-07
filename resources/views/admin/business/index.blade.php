@@ -8,13 +8,10 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h3 class="mb-0">Busineses</h3>
+                        <h3 class="mb-0">Businesses</h3>
                     </div>
                     <div class="col-sm-6 justify-content-end d-flex">
-                        <button class="btn btn-primary" onclick="createOrEdit.assignInitValue()" data-bs-toggle="modal" data-bs-target="#create-category">
-                            <i class="bi bi-plus"></i>
-                            Create
-                        </button>
+                        
                     </div>
                 </div>
             </div>

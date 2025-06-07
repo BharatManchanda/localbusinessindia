@@ -21,7 +21,7 @@ class LandingController extends Controller
     }
 
     public function addBusiness() {
-        $categories = CategoryRepository::getAll();
+        $categories = CategoryRepository::getAllActive();
         return view("landing.business.CreateOrEdit.index", [
             "categories" => $categories
         ]);

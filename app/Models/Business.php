@@ -23,6 +23,7 @@ class Business extends Model
         'instagram_url',
         'facebook_url',
         'status',
+        'password',
     ];
 
     public function getSlugOptions() : SlugOptions {

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
     DashboardController,
 };
+use App\Http\Controllers\Auth\AuthSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,18 +23,22 @@ use App\Http\Controllers\Admin\{
 |
 */
 
+Route::prefix("/auth")->name('auth.')->group(function() {
+    Route::post("login", [AuthSessionController::class, 'login'])->name('login');
+    Route::get("logout", [AuthSessionController::class, 'logout'])->name('logout');
+});
+
 Route::name('landing.')->group(function() {
     Route::get('/', [LandingController::class, 'home'])->name("home");
 
     // Business
     Route::name('business.')->prefix('/business')->group(function() {
-        // Route::get("/detail/{slug}", [LandingController::class, 'businessDetail'])->name("detail");
         Route::get("/add", [LandingController::class, 'addBusiness'])->name("add");
         Route::post("/save", [LandingController::class, 'saveBusiness'])->name("save");
     });
 });
 
-Route::name('admin.')->prefix('/admin')->group(function() {
+Route::middleware(['auth'])->name('admin.')->prefix('/admin')->group(function() {
 
     Route::name('dashboard.')->prefix('/dashboard')->group(function() {
         Route::get("/", [DashboardController::class, 'view'])->name("view");

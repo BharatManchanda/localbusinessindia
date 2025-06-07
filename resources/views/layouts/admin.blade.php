@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>AdminLTE v4 | Dashboard</title>
+        <title>Admin | Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="title" content="AdminLTE v4 | Dashboard" />
         <meta name="author" content="ColorlibHQ" />
@@ -154,7 +154,7 @@
                                 src="../../dist/assets/img/user2-160x160.jpg"
                                 class="user-image rounded-circle shadow"
                                 alt="User Image"
-                                />
+                            />
                             <span class="d-none d-md-inline">Alexander Pierce</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
@@ -252,7 +252,7 @@
                                     <p>Business</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon bi bi-box-seam-fill"></i>
                                     <p>
@@ -628,7 +628,7 @@
                                     <i class="nav-icon bi bi-circle text-info"></i>
                                     <p>Informational</p>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </nav>
                 </div>

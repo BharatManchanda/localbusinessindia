@@ -6,18 +6,32 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryRepository {
-    public static function getAll() {
-        $categories = Category::with(['children' => function ($query) {
-            $query->with("media")->where([
-                ['status', '=', 1],
-                ['is_visible_on_home', '=', 1],
-            ]);
-        }])->where([
-            ['status', '=', 1],
-            ['is_visible_on_home', '=', 1],
-            ['parent_id', '=', 0],
-        ])->get();
-        return $categories;
+    public static function getAll($isAllActive = false) {
+        $childrenQuery = function ($query) use ($isAllActive) {
+            $query->with("media")->where('status', 1);
+
+            if ($isAllActive) {
+                $query->where('is_visible_on_home', 1);
+            }
+        };
+
+        $whereConditions = [
+            ['status', 1],
+            ['parent_id', 0],
+        ];
+
+        if ($isAllActive) {
+            $whereConditions[] = ['is_visible_on_home', 1];
+        }
+
+        return Category::with(['children' => $childrenQuery])
+            ->where($whereConditions)
+            ->get();
+    }
+
+
+    public static function getAllActive() {
+        return self::getAll(true);
     }
 
     public static function list(Request $request) {

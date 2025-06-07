@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\{Business, Category};
+use Illuminate\Http\Request;
 
 class BusinessRepository
 {

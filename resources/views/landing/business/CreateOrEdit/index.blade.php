@@ -30,7 +30,7 @@
             </div>
             
             <div class="col-md-6 mb-3">
-                <input type="url" class="form-control" name="website" placeholder="Enter website*" required oninput="createOrEdit.onChange('website', this.value)">
+                <input type="url" class="form-control" name="website" placeholder="Enter website" required oninput="createOrEdit.onChange('website', this.value)">
                 <span id="websiteHelpInline" class="form-text text-danger"></span>
             </div>
         </div>

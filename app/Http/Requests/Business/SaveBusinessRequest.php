@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Business;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 class SaveBusinessRequest extends FormRequest
@@ -22,7 +21,6 @@ class SaveBusinessRequest extends FormRequest
     public function rules(): array {
         return [
             'name' => 'required|string|max:255',
-            // 'slug' => 'required|string|max:255|unique:businesses,slug',
             'email' => 'required|email|max:255|unique:businesses,email',
             'phone' => 'required|string|max:10',
             'category_id' => 'required|integer|exists:categories,id',
@@ -34,6 +32,7 @@ class SaveBusinessRequest extends FormRequest
             'facebook_url' => 'nullable|url|max:255',
             'business_logo'    => 'required|image|mimes:jpg,jpeg,png|max:2048',
             'declaration'      => 'required|in:1',
+            'password'      => 'required',
         ];
     }
 

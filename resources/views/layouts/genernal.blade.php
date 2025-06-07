@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('/assets/bootstrap-5.3.3-dist/css/bootstrap.css') }}"></link>
-    <script src="{{ asset('/assets/bootstrap-5.3.3-dist/js/bootstrap.bundle.js') }}" ></script>
-    @yield('import.header.files')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>@yield('title', 'My App')</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ asset('/assets/bootstrap-5.3.3-dist/css/bootstrap.css') }}"></link>
+        <script src="{{ asset('/assets/bootstrap-5.3.3-dist/js/bootstrap.bundle.js') }}" ></script>
+        @yield('import.header.files')
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <title>@yield('title', 'My App')</title>
+    </head>
 <body>
+    @include("layouts.constant.login")
+    @include("layouts.component.login.index")
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-2 py-lg-3">
         <div class="container">
             <a class="navbar-brand fw-bold" href="{{route('landing.home')}}">Local <span class="text-primary">Business</span> India</a>
@@ -25,9 +27,47 @@
                         <input class="form-control me-md-2 mb-2 mb-md-0" type="text" value="Bathinda">
                         <button class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
-                    <div class="ms-lg-3 mt-2 mt-lg-0 d-flex">
-                        <a href="{{route('landing.business.add')}}" class="text-primary me-3 mb-2 mb-lg-0">Free Listing</a>
-                        <button class="btn btn-primary">Login/Sign up</button>
+                    <div class="ms-lg-3 mt-2 mt-lg-0 d-flex align-items-center" id="user-section">
+                        @auth
+                            <div class="dropdown">
+                                <button class="btn btn-light dropdown-toggle d-flex align-items-center" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user-circle me-2 fs-4"></i>
+                                    <span class="text-capitalize">{{ Auth::user()->name }}</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                    @if(Auth::user()->role == "admin")
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('admin.dashboard.view') }}">
+                                                <i class="fa-solid fa-gauge me-2"></i>Dashboard
+                                            </a>
+                                        </li>
+                                    @elseif(Auth::user()->role == "business")
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fas fa-user me-2"></i>Profile
+                                        </a>
+                                    </li>
+                                    @endif
+                                    {{-- <li>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fas fa-cog me-2"></i>Settings
+                                        </a>
+                                    </li> --}}
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('auth.logout') }}">
+                                            <i class="fas fa-sign-out-alt me-2"></i>Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        @endauth
+                        @guest
+                            <a href="{{route('landing.business.add')}}" class="text-primary me-3 mb-2 mb-lg-0">Free Listing</a>
+                            <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#login-form">Login</button>
+                        @endguest
                     </div>
                 </div>
             </div>
@@ -65,5 +105,6 @@
             </div>
         </div>
     </footer>
+    <x-toast />
 </body>
 </html>

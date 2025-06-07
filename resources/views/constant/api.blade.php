@@ -1,5 +1,27 @@
 <script>
     const api = {
+        auth:{
+            login:  async (data) => {
+                const formData = new FormData();
+
+                for (const key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        formData.append(key, data[key]);
+                    }
+                }
+
+                const response = await fetch("{{route('auth.login')}}", {
+                    method: 'POST',
+                    body: formData,
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json(); // Parse error response
+                    throw errorData;
+                }
+                return response.json();
+            },
+        },
         admin: {
             category: {
                 save:  async (data) => {
