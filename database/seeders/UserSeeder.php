@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder {
     public function run(): void {
-        $user = User::where("email", "admin@yopmail.com")->first();
+        $user = User::where("email", "admin@localbusinessindia.com")->first();
         if (!$user) {
             User::create([
-                "name" => "super admin",
-                "email" => "admin@yopmail.com",
-                "password" => Hash::make("password"),
+                "name" => "Super Admin",
+                "email" => "admin@localbusinessindia.com",
+                "password" => Hash::make("LetMeIn@49"),
                 "role" => "admin",
             ]);
         }
