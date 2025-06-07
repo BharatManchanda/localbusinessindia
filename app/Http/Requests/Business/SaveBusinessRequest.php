@@ -32,7 +32,8 @@ class SaveBusinessRequest extends FormRequest
             'facebook_url' => 'nullable|url|max:255',
             'business_logo'    => 'required|image|mimes:jpg,jpeg,png|max:2048',
             'declaration'      => 'required|in:1',
-            'password'      => 'required',
+            'password' => 'required|min:8',
+            'confirm_password' => 'required|same:password',
         ];
     }
 

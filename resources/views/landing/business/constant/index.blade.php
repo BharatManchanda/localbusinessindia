@@ -17,6 +17,9 @@
             facebook_url: "",
             business_logo: "",
             declaration: 0,
+            password: "",
+            confirm_password: "",
+            aboutus: "",
             _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
         errors:{},
@@ -35,10 +38,13 @@
                 instagram_url: "",
                 facebook_url: "",
                 business_logo: "",
+                password: "",
+                confirm_password: "",
+                aboutus: "",
                 declaration: 0,
                 _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             };
-            let fields = ["id", "name", "email", "phone", "website", "category_id", "sub_category_id", "city", "business_address", "instagram_url", "facebook_url"];
+            let fields = ["id", "name", "email", "phone", "website", "category_id", "sub_category_id", "city", "business_address", "instagram_url", "facebook_url", "password", "confirm_password", "aboutus"];
             fields.forEach(field => {
                 const input = document.querySelector(`[name=${field}]`);
                 if (input) {
@@ -76,6 +82,10 @@
             document.getElementById("facebook_urlHelpInline").innerHTML = createOrEdit.errors?.facebook_url ?? "";
             document.getElementById("business_logoHelpInline").innerHTML = createOrEdit.errors?.business_logo ?? "";
             document.getElementById("declarationHelpInline").innerHTML = createOrEdit.errors?.declaration ?? "";
+            document.getElementById("declarationHelpInline").innerHTML = createOrEdit.errors?.declaration ?? "";
+            document.getElementById("passwordHelpInline").innerHTML = createOrEdit.errors?.password ?? "";
+            document.getElementById("confirm_passswordHelpInline").innerHTML = createOrEdit.errors?.confirm_password ?? "";
+            document.getElementById("aboutusHelpInline").innerHTML = createOrEdit.errors?.aboutus ?? "";
         },
         setError:(error) => {
             createOrEdit.errors=error

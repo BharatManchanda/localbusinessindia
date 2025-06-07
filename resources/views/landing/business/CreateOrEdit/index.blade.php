@@ -62,9 +62,13 @@
         </div>
         
         <div class="row">
-            <div class="col-12 mb-3">
+            <div class="col-md-6 mb-3">
                 <textarea class="form-control" placeholder="Enter business address here*" name="business_address" required oninput="createOrEdit.onChange('business_address', this.value)"></textarea>
                 <span id="business_addressHelpInline" class="form-text text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <textarea class="form-control" placeholder="Enter About Us*" name="aboutus" required oninput="createOrEdit.onChange('aboutus', this.value)"></textarea>
+                <span id="aboutusHelpInline" class="form-text text-danger"></span>
             </div>
         </div>
         
@@ -77,6 +81,17 @@
             <div class="col-md-6 mb-3">
                 <input type="url" class="form-control" name="facebook_url" placeholder="Enter facebook page url" oninput="createOrEdit.onChange('facebook_url', this.value)">
                 <span id="facebook_urlHelpInline" class="form-text text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <input type="password" class="form-control" name="password" placeholder="Enter Password" oninput="createOrEdit.onChange('password', this.value)">
+                <span id="passwordHelpInline" class="form-text text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <input type="password" class="form-control" name="confirm_password" placeholder="Enter Confirm Password" oninput="createOrEdit.onChange('confirm_password', this.value)">
+                <span id="confirm_passswordHelpInline" class="form-text text-danger"></span>
             </div>
         </div>
         
