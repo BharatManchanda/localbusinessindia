@@ -24,6 +24,7 @@ class Business extends Model
         'facebook_url',
         'status',
         'password',
+        'aboutus',
     ];
 
     public function getSlugOptions() : SlugOptions {

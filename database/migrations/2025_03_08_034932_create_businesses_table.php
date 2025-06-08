@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string("facebook_url")->nullable();
             $table->tinyInteger("status")->default(0);
             $table->string("password")->nullable();
+            $table->longText("aboutus")->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
