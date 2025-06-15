@@ -4,6 +4,12 @@
 @section('import.header.files')
     <link rel="stylesheet" href="{{url('/assets/css/businesslist.css')}}">
     <style>
+        .business-image{
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            object-position: center;
+        }
         /* Minimal custom styles that can't be achieved with Bootstrap alone */
     </style>
 @endsection
@@ -50,7 +56,7 @@
                     <div class="card mb-3">
                         <div class="row g-0">
                             <div class="col-md-5">
-                                <img src='{{url("/storage/{$business->media->file_path}") }}' class="img-fluid rounded-start" alt="Electrician">
+                                <img class="business-image" src='{{url("/storage/{$business->media->file_path}") }}' class="img-fluid rounded-start" alt="Electrician">
                             </div>
                             <div class="col-md-7">
                                 <div class="card-body">
