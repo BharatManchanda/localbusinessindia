@@ -15,7 +15,7 @@
                     <div class="d-flex justify-content-between align-items-start mb-3">
                         <div class="flex-grow-1">
                             <div class="d-flex align-items-center mb-2">
-                                <h4 class="mb-0 me-2">Annanya Electrical</h4>
+                                <h4 class="mb-0 me-2">{{ $business->name }}</h4>
                                 <i class="fas fa-check-circle text-success"></i>
                             </div>
                             <div class="d-flex align-items-center mb-2">
@@ -25,11 +25,11 @@
                             </div>
                             <p class="text-muted mb-2" style="font-size: 13px;">
                                 <i class="fas fa-map-marker-alt me-1"></i>
-                                Main Bazar Mehal Sector ST Mehal • Over 24 hrs • 7 years in Business
+                                {{ $business->business_address }} {{ $business->city }}
                             </p>
                             <div class="d-flex gap-2">
                                 <button class="btn btn-whatsapp btn-sm px-3">
-                                    <i class="fab fa-whatsapp me-1"></i> 91234567789
+                                    <i class="fab fa-whatsapp me-1"></i> {{ $business->phone }}
                                 </button>
                                 <button class="btn btn-orange btn-sm px-3">Send Enquiry</button>
                             </div>
@@ -400,9 +400,8 @@
                     <!-- Address -->
                     <div class="mb-4">
                         <h6 class="mb-2">Address</h6>
-                        <p class="mb-1" style="font-size: 13px;">Sector 51, Main Road, Mehal Sector</p>
-                        <p class="mb-1" style="font-size: 13px;">ST Mehal - 140317 Near Lamora</p>
-                        <p class="mb-3" style="font-size: 13px;">Road</p>
+                        <p class="mb-1" style="font-size: 13px;">{{ $business->business_address }}</p>
+                        <p class="mb-1" style="font-size: 13px;">{{ $business->city }}</p>
                         <div class="d-flex gap-2">
                             <button class="btn btn-orange btn-sm">
                                 <i class="fas fa-directions me-1"></i> Get Directions
