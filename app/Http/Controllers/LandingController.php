@@ -61,7 +61,7 @@ class LandingController extends Controller
         }
     }
 
-    public function businessDetail(Request $request, $subCategory, $location, $slug) {
+    public function businessDetail(Request $request, $slug) {
         try {
             $business = BusinessRepository::getDetail($slug);
             return view("landing.business.detail.index", [
