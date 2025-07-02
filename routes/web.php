@@ -62,5 +62,5 @@ Route::middleware(['auth'])->name('admin.')->prefix('/admin')->group(function() 
 
 Route::name('landing.')->group(function() {
     Route::get("/{subCategory}/{location}", [LandingController::class, 'businessListView'])->name("business.get.list");
-    Route::get("/{slug}", [LandingController::class, 'businessDetail'])->name("business.get.detail");
+    Route::get("/{subCategory}/{location}/{slug}", [LandingController::class, 'businessDetail'])->name("business.get.detail");
 });
