@@ -33,6 +33,10 @@ class Business extends Model
             ->saveSlugsTo('slug');
     }
 
+    public function subCategory() {
+        return $this->hasOne(Category::class, 'id', 'sub_category_id');
+    }
+
     public function media() {
         return $this->morphOne(Media::class, 'mediaable');
         // return $this->morphMany(Media::class, 'mediaable');

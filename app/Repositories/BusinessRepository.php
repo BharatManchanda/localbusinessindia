@@ -55,7 +55,9 @@ class BusinessRepository
 
     public static function list($data) {
         $row_per_page = $data['row_per_page'] ?? 10;
-        $list = Business::latest()->paginate($row_per_page);
+        $list = Business::with("subCategory")
+            ->latest()
+            ->paginate($row_per_page);
         return $list;
     }
 

@@ -60,7 +60,7 @@
                             </div>
                             <div class="col-md-7">
                                 <div class="card-body">
-                                    <a href="{{ route('landing.business.get.detail', ['slug' => $business->slug, 'location' => $business->city, 'subCategory' => "business"]) }}" class="text-reset text-decoration-none text-capitalize">
+                                    <a href="{{ route('landing.business.get.detail', ['slug' => $business->slug, 'location' => $business->city, 'subCategory' => $business->subCategory->slug]) }}" class="text-reset text-decoration-none text-capitalize">
                                         <h5 class="card-title text-capitalize">{{ $business->name }}</h5>
                                     </a>
                                     <p class="card-text text-capitalize">{{ $business->business_address }} - {{ $business->city }}</p>
