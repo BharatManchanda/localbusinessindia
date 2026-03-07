@@ -74,7 +74,7 @@ Route::get('/run-migrate', function () {
 
         return response()->json([
             'status' => true,
-            'message' => 'Migration executed successfully',
+            'message' => 'Migration executed successfully.',
             'output' => Artisan::output()
         ]);
 
