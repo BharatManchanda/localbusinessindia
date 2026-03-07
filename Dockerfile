@@ -9,12 +9,13 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     libzip-dev \
+    libpq-dev \
     zip \
     unzip \
-    default-mysql-client \
+    postgresql-client \
     npm \
     nodejs \
-    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip
+    && docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath gd zip
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 

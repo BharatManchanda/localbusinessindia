@@ -7,22 +7,25 @@ services:
     volumes:
       - ./:/var/www
     depends_on:
-      mysql:
+      postgres:
         condition: service_healthy
     command: >
-      sh -c "until php artisan migrate --force; do echo 'Waiting for MySQL...'; sleep 3; done; php-fpm"
+      sh -c "until php artisan migrate --force; do echo 'Waiting for PostgreSQL...'; sleep 3; done; php-fpm"
 
-  mysql:
-    image: mysql:8
-    container_name: localbusinessindia-mysql-1
+  postgres:
+    image: postgres:16
+    container_name: localbusinessindia-postgres-1
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: localbusinessindia
+      POSTGRES_DB: localbusinessindia
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
     ports:
-      - "3306:3306"
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -ppassword --silent"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d localbusinessindia"]
       interval: 5s
       timeout: 3s
       retries: 20
@@ -38,3 +41,6 @@ services:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - app
+
+volumes:
+  postgres_data:
