@@ -1,4 +1,4 @@
-FROM php:8.2-cli
+FROM php:8.2-fpm
 
 WORKDIR /var/www
 
@@ -8,23 +8,20 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
+    libzip-dev \
     zip \
     unzip \
+    default-mysql-client \
     npm \
     nodejs \
-    default-mysql-client \
-    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
+    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip
 
-# install composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY . /var/www
 
-RUN composer install --no-dev --optimize-autoloader
-
-RUN chown -R www-data:www-data /var/www \
+RUN composer install --no-dev --optimize-autoloader \
+    && chown -R www-data:www-data /var/www \
     && chmod -R 775 storage bootstrap/cache
 
-EXPOSE 8000
-
-CMD php artisan serve --host=0.0.0.0 --port=8000
+EXPOSE 9000
