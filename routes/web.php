@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\{
     DashboardController,
 };
 use App\Http\Controllers\Auth\AuthSessionController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,3 +65,24 @@ Route::name('landing.')->group(function() {
     Route::get("/{subCategory}/{location}", [LandingController::class, 'businessListView'])->name("business.get.list");
     Route::get("/{subCategory}/{location}/{slug}", [LandingController::class, 'businessDetail'])->name("business.get.detail");
 });
+
+Route::get('/run-migrate', function () {
+    try {
+        Artisan::call('migrate', [
+            '--force' => true
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Migration executed successfully',
+            'output' => Artisan::output()
+        ]);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => false,
+            'message' => $e->getMessage()
+        ], 500);
+    }
+});
+
