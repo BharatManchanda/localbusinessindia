@@ -18,7 +18,7 @@
     @include("layouts.component.login.index")
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-2 py-lg-3">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="{{route('landing.home')}}">Local <span class="text-primary">Business</span> India</a>
+            <a class="navbar-brand fw-bold" href="{{route('landing.home')}}">Local<span class="text-primary">Business</span>India</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
