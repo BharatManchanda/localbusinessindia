@@ -11,7 +11,7 @@ class LandingController extends Controller
     //
     public function home() {
         $catgories = CategoryRepository::getHomeCategory();
-        return view("landing.home.index", ['categories' => $catgories]);
+        return view("landing.Home.index", ['categories' => $catgories]);
     }
 
     public function businessListView(Request $request, $subCategory, $location) {
